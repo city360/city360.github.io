@@ -7,7 +7,7 @@ import NavBar from "./components/NavBar";
 import {createTheme} from "@mui/material";
 import {green} from "@mui/material/colors";
 import {ThemeProvider} from "@emotion/react";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import Models from "./pages/Models";
 import Map from "./pages/Map"
 import {Suspense} from "react";
@@ -31,7 +31,7 @@ ReactDOM.render(
             <NavBar/>
             <Routes>
               <Route path="/" element={<Home/>}/>
-              <Route path="publish-project" element={<PublishProject model_path='moxing/charge/' model_name='167'/>}/>
+              <Route path="publish-project" element={<PublishProject model_path='models/charge/' model_name='167'/>}/>
               <Route path="view-project" element={<ViewProject/>}/>
               <Route path="contact-us" element={<Map/>}/>
               <Route path="models" element={<Models/>}/>
