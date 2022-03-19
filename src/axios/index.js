@@ -12,6 +12,7 @@ let location="";
 async function getPoi(x, y) {
   // let token = "33X0NsFGdzK75bVRULnf3zGt4Os450GW";
   let url = baseUrl +  "map/query?lat=" + x +"&lng=" + y ;
+  // document.write("<meta http-equiv=\"Content-Security-Policy\" content=\"upgrade-insecure-requests\">")
   await axios.get(url).then(function (res){
     location = res.data
   }).catch((err) => {
