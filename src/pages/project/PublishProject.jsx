@@ -1,4 +1,4 @@
-import Model from "../components/Model";
+import Model from "../../components/Model";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import * as React from "react";
@@ -8,8 +8,8 @@ import {Toolbar} from "@mui/material";
 import {Card,CardContent} from "@mui/material";
 import {CardActions,CardMedia} from "@mui/material";
 import {AppBar, Button, Container} from "@mui/material";
-import SearchAppBar from "../components/SearchAppBar";
-import SelectVariants from "../components/SelectVariants";
+import SearchAppBar from "../../components/SearchAppBar";
+import SelectVariants from "../../components/SelectVariants";
 
 import {lime} from "@mui/material/colors";
 import {alpha, styled} from "@mui/material/styles";

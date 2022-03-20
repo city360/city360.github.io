@@ -23,12 +23,11 @@ export default function MyMap(props) {
   const [latlng, setLatlng] = React.useState({lat:31.292195698179793 , lng:121.54626914810665})
   const[location, setLocation] = React.useState('')
   return (
-      <div style={{height:'700px', width:'100%'}}>
+      <div style={{height:'100%', width:'100%'}}>
         <Map onClick={(e) => {
           getLocation(e.latlng.lat,e.latlng.lng)
           console.log((e.latlng.lat),(e.latlng.lng))
-
-        }} enableScrollWheelZoom={true} center={{lng: latlng.lng, lat: latlng.lat}} zoom="11">
+        }} enableScrollWheelZoom={true} center={{lng: latlng.lng, lat: latlng.lat}} zoom="16">
           <Marker position={{lng: latlng.lng, lat: latlng.lat}}/>
           <ScaleControl/>
           <InfoWindow position={{lng: latlng.lng, lat: latlng.lat}} text={location} title="地址信息"/>
