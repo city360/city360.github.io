@@ -20,19 +20,14 @@ export default function MyMap(props) {
       setLocation(data)
     })
   }
-  const [latlng, setLatlng] = React.useState({lat:39, lng:116})
-  const[location, setLocation] = React.useState('江西省井冈山市')
-  // console.log(window.BMapGL.Geocoder)
-  // var myGeo = new window.BMap.Geocoder({extensions_town: true});
-  // myGeo.getLocation(new window.BMap.Point(116.364, 39.993), function(result){
-  //   if (result){
-  //     alert(result.address);
-  //   }
-  // });
+  const [latlng, setLatlng] = React.useState({lat:31.292195698179793 , lng:121.54626914810665})
+  const[location, setLocation] = React.useState('')
   return (
       <div style={{height:'700px', width:'100%'}}>
         <Map onClick={(e) => {
           getLocation(e.latlng.lat,e.latlng.lng)
+          console.log((e.latlng.lat),(e.latlng.lng))
+
         }} enableScrollWheelZoom={true} center={{lng: latlng.lng, lat: latlng.lat}} zoom="11">
           <Marker position={{lng: latlng.lng, lat: latlng.lat}}/>
           <ScaleControl/>
