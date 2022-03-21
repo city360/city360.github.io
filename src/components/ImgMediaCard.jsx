@@ -6,6 +6,9 @@ import CardMedia from '@mui/material/CardMedia';
 import OutlineButton from '../components/OutlineButton'
 import Typography from '@mui/material/Typography';
 import FilledButton from "./FilledButton";
+import {Button} from "@mui/material";
+
+
 
 /**
  * 渲染一张卡片，链接可以跳转到相应的模型
@@ -14,6 +17,10 @@ import FilledButton from "./FilledButton";
  * @constructor
  */
 export default function ImgMediaCard(props) {
+  // console.log(props)
+  const addModel=(model_path,model_name)=>{
+    props.addModel(model_path,model_name);
+  }
   return (
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
@@ -33,9 +40,12 @@ export default function ImgMediaCard(props) {
         </CardContent>
         <CardActions>
           <OutlineButton>详情</OutlineButton>
-          <FilledButton>
+          <Button onClick={()=>{addModel(props.model_path,props.model_name)}} variant={"contained"} size={"large"} style={{margin:'0 20px'}}>
             置入
-          </FilledButton>
+          </Button>
+          {/*<FilledButton>*/}
+          {/*  置入*/}
+          {/*</FilledButton>*/}
         </CardActions>
       </Card>
   );

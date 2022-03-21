@@ -5,15 +5,29 @@ import {OBJLoader} from "three/examples/jsm/loaders/OBJLoader";
 import {DDSLoader} from "three/examples/jsm/loaders/DDSLoader";
 import {MTLLoader} from "three/examples/jsm/loaders/MTLLoader";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import {TransformControls} from "three/examples/jsm/controls/TransformControls";
 
 let container;
 
 let camera, scene, renderer;
 
+let tran
 let mouseX = 0, mouseY = 0;
 
 let object;
 let rayCaster = new THREE.Raycaster();
+/**
+ * 这个manager看起来是可以复用的
+ * @type {LoadingManager}
+ */
+const manager = new THREE.LoadingManager();
+manager.addHandler(/\.dds$/i, new DDSLoader());
+
+/**
+ * 一个mtl loader
+ * @type {MTLLoader}
+ */
+const loader = new MTLLoader(manager);
 
 
 /**
@@ -21,9 +35,17 @@ let rayCaster = new THREE.Raycaster();
  */
 class Model extends React.Component {
   constructor(props) {
+    console.log(props)
     super(props);
-    this.state = {model_path: props.model_path, model_name: props.model_name}
+    this.props.ref1.current = {
+      addModel:(model_path,model_name)=>{
+        addModel(model_path,model_name);
+      }
+    }
+    this.state = {...props}
+    // this.state = {model_path: props.model_path, model_name: props.model_name}
   }
+
 
   render() {
     return (
@@ -31,13 +53,37 @@ class Model extends React.Component {
     )
   }
 
+  addModel = (model_path, model_name) => {
+    addModel(model_path, model_name)
+  };
+
   /**
    * 进行模型的渲染
    */
   componentDidMount() {
     init(this.state.model_path, this.state.model_name);
     animate()
+
+    // addModel(this.state.model_path, this.state.model_name);
   }
+
+}
+
+
+// models
+
+function onProgress(xhr) {
+
+  if (xhr.lengthComputable) {
+
+    const percentComplete = xhr.loaded / xhr.total * 100;
+    console.log('model ' + Math.round(percentComplete, 2) + '% downloaded');
+
+  }
+
+}
+
+function onError() {
 }
 
 function init(model_path, model_name) {
@@ -59,51 +105,9 @@ function init(model_path, model_name) {
   camera.add(pointLight);
   scene.add(camera);
 
-  // models
-
-  function onProgress(xhr) {
-
-    if (xhr.lengthComputable) {
-
-      const percentComplete = xhr.loaded / xhr.total * 100;
-      console.log('model ' + Math.round(percentComplete, 2) + '% downloaded');
-
-    }
-
-  }
-
-  function onError() {
-  }
-
-  /**
-   * 这个manager看起来是可以复用的
-   * @type {LoadingManager}
-   */
-  const manager = new THREE.LoadingManager();
-  manager.addHandler(/\.dds$/i, new DDSLoader());
-
-  /**
-   * 下面这一段很重要，第100行代码可以直接在场景当中加入这个模型
-   * @type {MTLLoader}
-   */
-  const loader = new MTLLoader(manager);
-  loader.setPath(model_path);
-  loader.load(model_name + '.mtl', (materials) => {
-    materials.preload();
-    const objLoader = new OBJLoader(manager);
-    objLoader.setMaterials(materials);
-    objLoader.setPath(model_path);
-    objLoader.load(model_name + '.obj', (object) => {
-      object.position.y = 0;
-      object.position.x = 0;
-      object.position.z = 0;
-      scene.add(object);
-    }, onProgress, onError)
-  })
-
   renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setClearColor('rgb(213,213,213)', 1.0);
-  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth*0.7)
+  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth * 0.7)
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1;
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -116,12 +120,22 @@ function init(model_path, model_name) {
 
 
   container.appendChild(renderer.domElement);
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.addEventListener('change', render); // use if there is no animation loop
-  controls.minDistance = 400;
-  controls.maxDistance = 10000;
-  controls.target.set(0, 0, 0);
-  controls.update();
+  const orbit = new OrbitControls(camera, renderer.domElement);
+  orbit.addEventListener('change', render); // use if there is no animation loop
+  orbit.minDistance = 400;
+  orbit.maxDistance = 10000;
+  orbit.target.set(0, 0, 0);
+  orbit.update();
+
+  tran = new TransformControls(camera, renderer.domElement);
+  tran.addEventListener('change', render);
+
+  tran.addEventListener('dragging-changed', function (event) {
+    orbit.enabled = !event.value;
+  });
+
+
+  addModel(model_path, model_name);
 
   window.addEventListener('resize', onWindowResize);
 
@@ -131,12 +145,32 @@ function onWindowResize() {
 
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-  console.log(document.getElementById("model-box").offsetWidth)
-  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth*0.75)
+  // console.log(document.getElementById("model-box").offsetWidth)
+  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth * 0.75)
 }
 
 function animate() {
   requestAnimationFrame(animate);
+  render();
+}
+
+function addModel(model_path, model_name) {
+  loader.setPath(model_path);
+  loader.load(model_name + '.mtl', (materials) => {
+    materials.preload();
+    const objLoader = new OBJLoader(manager);
+    objLoader.setMaterials(materials);
+    objLoader.setPath(model_path);
+    objLoader.load(model_name + '.obj', (object) => {
+      object.position.y = 0;
+      object.position.x = 0;
+      object.position.z = 0;
+      scene.add(object);
+      tran.attach(object)
+      scene.add(tran)
+      // console.log(object)
+    }, onProgress, onError)
+  });
   render();
 }
 
