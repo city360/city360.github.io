@@ -2,15 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter, Route, Routes} from "react-router-dom";
 import PublishProject from "./pages/project/PublishProject";
-import ViewProject from "./pages/ViewProject";
+import ViewProject from "./pages/view/ViewProject";
 import NavBar from "./components/NavBar";
 import {createTheme} from "@mui/material";
 import {green} from "@mui/material/colors";
 import {ThemeProvider} from "@emotion/react";
 import Home from "./pages/home/Home";
-import Models from "./pages/Models";
-import Map from "./pages/Map"
+import Models from "./pages/model/Models";
+import Map from "./pages/contact/Map"
 import {Suspense} from "react";
+import App from "./App";
 
 const theme = createTheme({
   palette: {

@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import GroupIcon from '@mui/icons-material/Group';
 import SettingsIcon from '@mui/icons-material/Settings';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
-import Login from "../../components/Login";
 
 const strs = ["快速发布、准确定位。\n",
   "个性化定制，模块化定制。\n",
@@ -110,9 +109,7 @@ export default class Home extends React.Component {
               </Paper>
             </Box>
           </Container>
-          <Login/>
         </div>
-
     )
   }
 
