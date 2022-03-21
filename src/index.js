@@ -11,7 +11,6 @@ import Home from "./pages/home/Home";
 import Models from "./pages/model/Models";
 import Map from "./pages/contact/Map"
 import {Suspense} from "react";
-import App from "./App";
 
 const theme = createTheme({
   palette: {
@@ -30,7 +29,8 @@ ReactDOM.render(
         <HashRouter>
           <Suspense fallback={null}>
             <NavBar/>
-            <div style={{marginTop:45}}>
+            {/*<div style={{marginTop:40}}>*/}
+            <div>
               <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="publish-project" element={<PublishProject model_path='models/charge/' model_name='167'/>}/>

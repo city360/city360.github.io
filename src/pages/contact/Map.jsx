@@ -1,4 +1,3 @@
-import axios from "axios";
 import {InfoWindow, Marker, ScaleControl, Map} from "react-bmapgl";
 import React from "react";
 import {getPoi} from "../../axios";
@@ -12,16 +11,25 @@ import {getPoi} from "../../axios";
  * @constructor
  */
 export default function MyMap(props) {
+  /**
+   * 按照经纬度获取位置
+   * @param x
+   * @param y
+   */
   const getLocation=(x,y)=>{
     setLatlng({lat: x, lng: y})
-    // let temp = getPoi(x, y)
-    // setLocation(temp)
     getPoi(x,y).then((data)=>{
       setLocation(data)
     })
   }
   const [latlng, setLatlng] = React.useState({lat:31.292195698179793 , lng:121.54626914810665})
   const[location, setLocation] = React.useState('')
+
+  //在初始化的时候进行位置设置
+  getPoi(latlng.lat,latlng.lng).then((data)=>{
+    setLocation(data)
+  })
+
   return (
       <div style={{height:'100%', width:'100%'}}>
         <Map onClick={(e) => {

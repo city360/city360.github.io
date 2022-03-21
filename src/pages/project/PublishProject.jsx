@@ -9,13 +9,14 @@ import CardList from "../../components/CardList";
 
 /**
  * 发布项目
- * @param props
+ * @param props 把props当中的模型信息传递过去
  * @returns {JSX.Element}
  * @constructor
  */
 function PublishProject(props) {
   return (
       <Box sx={{flexGrow: 1, display: 'flex'}}>
+        {/*<Box sx={{flexGrow: 1, display: 'flex', marginTop:10}}>*/}
         <Container>
           <Box
               sx={{
@@ -29,7 +30,7 @@ function PublishProject(props) {
               }}
           >
             <Paper id={"model-paper"} elevation={3} sx={{borderRadius:5}} >
-              <Box id={"model-box"} sx={{ display: 'flex', alignItems: 'flex-end' ,padding:'15px 90px'}}>
+              <Box id={"model-box"} sx={{ display: 'flex', alignItems: 'flex-end' ,padding:'15px 70px'}}>
                 <ModeEditIcon sx={{ color: 'action.active', mr: 1, my: 0.5 , display:'flex'}} />
                 <Typography
                     variant="h5"

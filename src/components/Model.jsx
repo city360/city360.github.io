@@ -12,9 +12,6 @@ let camera, scene, renderer;
 
 let mouseX = 0, mouseY = 0;
 
-let windowHalfX = window.innerWidth / 2;
-let windowHalfY = window.innerHeight / 2;
-
 let object;
 let rayCaster = new THREE.Raycaster();
 
@@ -78,9 +75,17 @@ function init(model_path, model_name) {
   function onError() {
   }
 
+  /**
+   * 这个manager看起来是可以复用的
+   * @type {LoadingManager}
+   */
   const manager = new THREE.LoadingManager();
   manager.addHandler(/\.dds$/i, new DDSLoader());
 
+  /**
+   * 下面这一段很重要，第100行代码可以直接在场景当中加入这个模型
+   * @type {MTLLoader}
+   */
   const loader = new MTLLoader(manager);
   loader.setPath(model_path);
   loader.load(model_name + '.mtl', (materials) => {
@@ -98,7 +103,7 @@ function init(model_path, model_name) {
 
   renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setClearColor('rgb(213,213,213)', 1.0);
-  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth*0.75)
+  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth*0.7)
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1;
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -113,7 +118,7 @@ function init(model_path, model_name) {
   container.appendChild(renderer.domElement);
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.addEventListener('change', render); // use if there is no animation loop
-  controls.minDistance = 600;
+  controls.minDistance = 400;
   controls.maxDistance = 10000;
   controls.target.set(0, 0, 0);
   controls.update();
@@ -124,9 +129,6 @@ function init(model_path, model_name) {
 
 function onWindowResize() {
 
-  windowHalfX = window.innerWidth / 2;
-  windowHalfY = window.innerHeight / 2;
-
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   console.log(document.getElementById("model-box").offsetWidth)
@@ -136,7 +138,6 @@ function onWindowResize() {
 function animate() {
   requestAnimationFrame(animate);
   render();
-
 }
 
 function render() {
