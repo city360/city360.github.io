@@ -135,7 +135,7 @@ function init(model_path, model_name) {
   });
 
 
-  addModel(model_path, model_name);
+  // addModel(model_path, model_name);
 
   window.addEventListener('resize', onWindowResize);
 

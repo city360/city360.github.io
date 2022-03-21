@@ -18,8 +18,8 @@ import {Button} from "@mui/material";
  */
 export default function ImgMediaCard(props) {
   // console.log(props)
-  const addModel=(model_path,model_name)=>{
-    props.addModel(model_path,model_name);
+  const addModel=(model_path,model_name,money)=>{
+    props.addModel(model_path,model_name,money);
   }
   return (
       <Card sx={{ maxWidth: 345 }}>
@@ -40,7 +40,7 @@ export default function ImgMediaCard(props) {
         </CardContent>
         <CardActions>
           <OutlineButton>详情</OutlineButton>
-          <Button onClick={()=>{addModel(props.model_path,props.model_name)}} variant={"contained"} size={"large"} style={{margin:'0 20px'}}>
+          <Button onClick={()=>{addModel(props.model_path,props.model_name,props.money)}} variant={"contained"} size={"large"} style={{margin:'0 20px'}}>
             置入
           </Button>
           {/*<FilledButton>*/}
