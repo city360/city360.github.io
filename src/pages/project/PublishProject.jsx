@@ -1,36 +1,11 @@
 import Model from "../../components/Model";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import * as React from "react";
+import {Button, Container, Paper} from "@mui/material";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import {Paper} from "@mui/material";
-import {Toolbar} from "@mui/material";
-import {Card,CardContent} from "@mui/material";
-import {CardActions,CardMedia} from "@mui/material";
-import {AppBar, Button, Container} from "@mui/material";
-import SearchAppBar from "../../components/SearchAppBar";
+import Typography from "@mui/material/Typography";
 import SelectVariants from "../../components/SelectVariants";
-
-import {lime} from "@mui/material/colors";
-import {alpha, styled} from "@mui/material/styles";
-
-const MyButton = styled(Button)(({theme}) => ({
-  // position: 'relative',
-  float:'right',
-  // position:''
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.68),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.86),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(25),
-    width: 'auto',
-  },
-}));
+import CardList from "../../components/CardList";
 
 /**
  * 发布项目
@@ -41,92 +16,61 @@ const MyButton = styled(Button)(({theme}) => ({
 function PublishProject(props) {
   return (
       <Box sx={{flexGrow: 1, display: 'flex'}}>
-        <Model {...props}/>
-        {/*<Box sx={{flexGrow: 1, display: 'block', margin:'10px 20px'}}>*/}
-        {/*  <div>*/}
-        {/*    <Box sx={{display: 'flex', alignItems: 'flex-begin', padding: '20px 20px'}}>*/}
-        {/*      <ModeEditIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>*/}
-        {/*      <Typography*/}
-        {/*          variant="h4"*/}
-        {/*          noWrap*/}
-        {/*          component="div"*/}
-        {/*          sx={{mr: 2, display:'flex'}}*/}
-        {/*      >*/}
-        {/*        模型库*/}
-        {/*      </Typography>*/}
-        {/*    </Box>*/}
-        {/*    <SearchAppBar minWidth={100}/>*/}
-        {/*  </div>*/}
-        {/*  <Box*/}
-        {/*      sx={{*/}
-        {/*        // height:'400px',*/}
-        {/*        display: 'flex',*/}
-        {/*        flexWrap: 'wrap',*/}
-        {/*        '& > :not(style)': {*/}
-        {/*          m: 1,*/}
-        {/*          width: 226,*/}
-        {/*          height: 226,*/}
-        {/*        },*/}
-        {/*      }}*/}
-        {/*  >*/}
-        {/*    <Card sx={{ maxWidth: 400 }}>*/}
-        {/*      <CardMedia*/}
-        {/*          component="img"*/}
-        {/*          height="128"*/}
-        {/*          image="images/cards/contemplative-reptile.jpg"*/}
-        {/*          alt="green iguana"*/}
-        {/*      />*/}
-        {/*      <CardActions>*/}
-        {/*        <Button size="small">Share</Button>*/}
-        {/*        <Button size="small">Learn More</Button>*/}
-        {/*      </CardActions>*/}
-        {/*    </Card>*/}
-        {/*    <Card sx={{ minWidth: 230 }}>*/}
-        {/*      <CardContent>*/}
-        {/*        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>*/}
-        {/*          Word of the Day*/}
-        {/*        </Typography>*/}
-        {/*        <Typography variant="h5" component="div">*/}
-        {/*          hhh*/}
-        {/*        </Typography>*/}
-        {/*        <Typography sx={{ mb: 1.5 }} color="text.secondary">*/}
-        {/*          adjective*/}
-        {/*        </Typography>*/}
-        {/*        <Typography variant="body2">*/}
-        {/*          well meaning and kindly.*/}
-        {/*          <br />*/}
-        {/*          {'"a benevolent smile"'}*/}
-        {/*        </Typography>*/}
-        {/*      </CardContent>*/}
-        {/*      <CardActions>*/}
-        {/*        <Button size="small">Learn More</Button>*/}
-        {/*      </CardActions>*/}
-        {/*    </Card>*/}
-        {/*  </Box>*/}
-        {/*  <AppBar position="static" sx={{height:'60px',borderRadius:'15px',padding:'0 10px'}}>*/}
-        {/*    <Toolbar disableGutters>*/}
-        {/*      <Typography*/}
-        {/*          variant="h6"*/}
-        {/*          noWrap*/}
-        {/*          component="div"*/}
-        {/*          sx={{mr: 2, display:'flex',margin:'0 10px'}}*/}
-        {/*      >*/}
-        {/*        总造价:*/}
-        {/*      </Typography>*/}
-        {/*      <Typography*/}
-        {/*          variant="h6"*/}
-        {/*          noWrap*/}
-        {/*          component="div"*/}
-        {/*          sx={{mr: 2, display:'flex',margin:'0 10px'}}*/}
-        {/*      >*/}
-        {/*        2000rmb*/}
-        {/*      </Typography>*/}
-        {/*      <MyButton>*/}
-        {/*        置入*/}
-        {/*      </MyButton>*/}
-        {/*    </Toolbar>*/}
-        {/*  </AppBar>*/}
-        {/*</Box>*/}
+        <Container>
+          <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                '& > :not(style)': {
+                  m: 1,
+                  maxWidth:700,
+                  maxHeight:900,
+                },
+              }}
+          >
+            <Paper id={"model-paper"} elevation={3} sx={{borderRadius:5}} >
+              <Box id={"model-box"} sx={{ display: 'flex', alignItems: 'flex-end' ,padding:'15px 90px'}}>
+                <ModeEditIcon sx={{ color: 'action.active', mr: 1, my: 0.5 , display:'flex'}} />
+                <Typography
+                    variant="h5"
+                    noWrap
+                    component="div"
+                    sx={{mr: 2, display:'flex'}}
+                >
+                  模型编辑器
+                </Typography>
+                <SelectVariants minWidth={240}/>
+                <Button variant="contained" size="large" sx={{margin:'0 0 10px 10px', display:'flex'}}>保存</Button>
+              </Box>
+              <Model {...props}/>
+            </Paper>
+            <Paper elevation={3} sx={{borderRadius:5}}>
+              <Box id={"model-lib"} sx={{ display: 'flex', alignItems: 'flex-end' ,padding:'15px 20px'}}>
+                <SelectVariants minWidth={160}/>
+                <Typography
+                    variant="h5"
+                    noWrap
+                    component="div"
+                    sx={{mr: 2, display:'flex'}}
+                >
+                  模型库
+                </Typography>
+              </Box>
+              <Container sx={{overflow:'hidden'}}>
+                <CardList/>
+              </Container>
+              <Typography
+                  variant="h6"
+                  noWrap
+                  component="div"
+                  sx={{mr: 2, display:'flex',margin:'5px 10px'}}
+              >
+                总造价: 2000rmb
+                <Button variant={"outlined"} size={"medium"} style={{color:'#8d6e63', border:'1px solid #8d6e63', marginLeft:100}}>置入</Button>
+              </Typography>
+            </Paper>
+          </Box>
+        </Container>
       </Box>)
 }
 

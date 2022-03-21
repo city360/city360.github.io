@@ -3,17 +3,23 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
+import OutlineButton from '../components/OutlineButton'
 import Typography from '@mui/material/Typography';
 
-export default function ImgMediaCard() {
+/**
+ * 渲染一张卡片，链接可以跳转到相应的模型
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
+export default function ImgMediaCard(props) {
   return (
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
             component="img"
             alt="green iguana"
             height="140"
-            image="images/cards/contemplative-reptile.jpg"
+            image={props.pic_url}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -25,8 +31,7 @@ export default function ImgMediaCard() {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
+          <OutlineButton>详情</OutlineButton>
         </CardActions>
       </Card>
   );
