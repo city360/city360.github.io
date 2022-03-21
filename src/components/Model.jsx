@@ -175,7 +175,7 @@ class Model extends React.Component {
               }}
           >
             <Paper id={"model-paper"} elevation={3} sx={{borderRadius:5}} >
-                <Box id={"model-box"} sx={{ display: 'flex', alignItems: 'flex-end' ,padding:'15px 20px'}}>
+                <Box id={"model-box"} sx={{ display: 'flex', alignItems: 'flex-end' ,padding:'15px 90px'}}>
                   <ModeEditIcon sx={{ color: 'action.active', mr: 1, my: 0.5 , display:'flex'}} />
                   <Typography
                       variant="h5"

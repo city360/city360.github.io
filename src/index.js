@@ -30,7 +30,7 @@ ReactDOM.render(
         <HashRouter>
           <Suspense fallback={null}>
             <NavBar/>
-            <div style={{marginTop:50}}>
+            <div style={{marginTop:45}}>
               <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="publish-project" element={<PublishProject model_path='models/charge/' model_name='167'/>}/>
