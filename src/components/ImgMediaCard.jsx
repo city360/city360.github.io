@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import OutlineButton from '../components/OutlineButton'
 import Typography from '@mui/material/Typography';
+import FilledButton from "./FilledButton";
 
 /**
  * 渲染一张卡片，链接可以跳转到相应的模型
@@ -23,7 +24,7 @@ export default function ImgMediaCard(props) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {props.pic_url.split('.')[0]}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Lizards are a widespread group of squamate reptiles, with over 6,000
@@ -32,6 +33,9 @@ export default function ImgMediaCard(props) {
         </CardContent>
         <CardActions>
           <OutlineButton>详情</OutlineButton>
+          <FilledButton>
+            置入
+          </FilledButton>
         </CardActions>
       </Card>
   );
