@@ -86,7 +86,7 @@ function init(model_path, model_name) {
 
   renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setClearColor('rgb(213,213,213)', 1.0);
-  renderer.setSize(window.innerWidth * 5 / 8, window.innerHeight * 3 /4);
+  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth*0.75)
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1;
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -206,7 +206,6 @@ class Model extends React.Component {
               <Container sx={{overflow:'hidden'}}>
                 <CardList/>
               </Container>
-
                     <Typography
                         variant="h6"
                         noWrap

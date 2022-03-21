@@ -4,7 +4,7 @@ import {HashRouter, Route, Routes} from "react-router-dom";
 import PublishProject from "./pages/project/PublishProject";
 import ViewProject from "./pages/view/ViewProject";
 import NavBar from "./components/NavBar";
-import {createTheme} from "@mui/material";
+import {Container, createTheme} from "@mui/material";
 import {green} from "@mui/material/colors";
 import {ThemeProvider} from "@emotion/react";
 import Home from "./pages/home/Home";
@@ -30,13 +30,15 @@ ReactDOM.render(
         <HashRouter>
           <Suspense fallback={null}>
             <NavBar/>
-            <Routes>
-              <Route path="/" element={<Home/>}/>
-              <Route path="publish-project" element={<PublishProject model_path='models/charge/' model_name='167'/>}/>
-              <Route path="view-project" element={<ViewProject/>}/>
-              <Route path="contact-us" element={<Map/>}/>
-              <Route path="models" element={<Models/>}/>
-            </Routes>
+            <div style={{marginTop:50}}>
+              <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="publish-project" element={<PublishProject model_path='models/charge/' model_name='167'/>}/>
+                <Route path="view-project" element={<ViewProject/>}/>
+                <Route path="contact-us" element={<Map/>}/>
+                <Route path="models" element={<Models/>}/>
+              </Routes>
+            </div>
           </Suspense>
         </HashRouter>
       </ThemeProvider>
