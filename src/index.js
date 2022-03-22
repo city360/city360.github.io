@@ -13,6 +13,7 @@ import Contact from "./pages/contact/Contact";
 // import Map from "./pages/contact/Map"
 import {Suspense} from "react";
 import App from "./pages/login";
+import Paralex from "./components/Paralex";
 
 const theme = createTheme({
   palette: {
@@ -24,6 +25,7 @@ const theme = createTheme({
     },
   },
 });
+
 
 ReactDOM.render(
     <React.StrictMode>
