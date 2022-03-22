@@ -31,7 +31,6 @@ function PublishProject(props) {
         </ListItem>
     );
   }
-
   // const [model_path, setPath] = useState('');
   // const [model_name, setName] = useState('');
   const [price, setPrice] = useState(0)
@@ -42,7 +41,7 @@ function PublishProject(props) {
    * @param model_name
    * @param money
    */
-  const addModel = (model_path, model_name,money) => {
+  const addModel = (model_path, model_name, money) => {
     _ref.current.addModel(model_path, model_name);
     setPrice(price+money)
   }

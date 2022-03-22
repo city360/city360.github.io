@@ -35,7 +35,7 @@ const loader = new MTLLoader(manager);
  */
 class Model extends React.Component {
   constructor(props) {
-    console.log(props)
+    // console.log(props)
     super(props);
     this.props.ref1.current = {
       addModel:(model_path,model_name)=>{
