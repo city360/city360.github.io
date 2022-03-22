@@ -7,6 +7,8 @@ import OutlineButton from '../components/OutlineButton'
 import Typography from '@mui/material/Typography';
 import FilledButton from "./FilledButton";
 import {Button} from "@mui/material";
+import BasicTabs from "./BasicTabs";
+import DialogSelect from "./DialogSelect";
 
 
 
@@ -23,12 +25,17 @@ export default function ImgMediaCard(props) {
   }
   return (
       <Card sx={{ maxWidth: 345 }}>
+        {/*<BasicTabs/>*/}
+        <DialogSelect/>
         <CardMedia
             component="img"
             alt="green iguana"
             height="140"
             image={props.pic_url}
-        />
+        >
+          {/*测试*/}
+        </CardMedia>
+
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {props.pic_url.split('.')[0]}

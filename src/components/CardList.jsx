@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import { FixedSizeList } from 'react-window';
+import { FixedSizeGrid as Grid } from 'react-window';
 import ImgMediaCard from "./ImgMediaCard";
 const model_paths = ['models/moxing/charge/', 'models/moxing/dianziping/', 'models/moxing/flower/', 'models/moxing/gonggaolan/', 'models/moxing/grass/', 'models/moxing/greenwall/', 'models/moxing/guizi1/', 'models/moxing/guizi2/', 'models/moxing/guizi3/', 'models/moxing/guizi4/', 'models/moxing/lighwall/', 'models/moxing/streetlight/', 'models/moxing/streetlight2/', 'models/moxing/streetlight3/', 'models/moxing/streetlight4/', 'models/moxing/streeylight5/', 'models/moxing/yiliaoboz/', 'models/moxing/zhanban1/'];
 const model_names = ['167', 'info+kiosk+with+55+inch+horizontal+touch+screen+panel', 'Sem+nome', '263xcl', 'grass', 'Plant+wall (1)', 'book+chest', 'Kids+toys', 'Wooden+bookcase+decor', 'cp_sport_1950_1200_500_2015_08_22', 'plant+wall+pannel', 'Antique+Lamp', 'Lamp-Flowers', 'street+lamps', 'street+lamps', 'street+lamps', 'yiliaobox', 'bulletin+board (1)']
@@ -17,10 +18,13 @@ function renderRow(props) {
   );
 }
 
+const Cell = ({ columnIndex, rowIndex}) => (
+      <ImgMediaCard pic_url={pic_urls[2*columnIndex + rowIndex]} model_path={model_paths[2*columnIndex + rowIndex]} model_name={model_names[2*columnIndex + rowIndex]}/>
+);
 export default function CardList() {
   return (
       <Box
-          sx={{ width: '100%', height: 400, maxWidth: 360, bgcolor: 'background.paper' }}
+          sx={{ width: '100%', height: 400, maxWidth: 800, bgcolor: 'background.paper' }}
       >
         <FixedSizeList
             height={400}
@@ -31,6 +35,17 @@ export default function CardList() {
         >
           {renderRow}
         </FixedSizeList>
+
+        {/*<Grid*/}
+        {/*    rowCount={Math.round(model_paths.length/2)}*/}
+        {/*    columnWidth={400}*/}
+        {/*    height={400}*/}
+        {/*    columnCount={5}*/}
+        {/*    rowHeight={200}*/}
+        {/*    width={360}*/}
+        {/*>*/}
+        {/*  {Cell}*/}
+        {/*</Grid>*/}
       </Box>
   );
 }

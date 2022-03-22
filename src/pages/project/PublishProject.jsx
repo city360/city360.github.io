@@ -10,6 +10,7 @@ import SelectVariants from "../../components/SelectVariants";
 import ImgMediaCard from '../../components/ImgMediaCard';
 import ListItem from '@mui/material/ListItem';
 import { FixedSizeList } from 'react-window';
+import CardList from "../../components/CardList";
 
 const model_paths = ['models/moxing/charge/', 'models/moxing/dianziping/', 'models/moxing/flower/', 'models/moxing/gonggaolan/', 'models/moxing/grass/', 'models/moxing/greenwall/', 'models/moxing/guizi1/', 'models/moxing/guizi2/', 'models/moxing/guizi3/', 'models/moxing/guizi4/', 'models/moxing/lighwall/', 'models/moxing/streetlight/', 'models/moxing/streetlight2/', 'models/moxing/streetlight3/', 'models/moxing/streetlight4/', 'models/moxing/streeylight5/', 'models/moxing/yiliaoboz/', 'models/moxing/zhanban1/'];
 const model_names = ['167', 'info+kiosk+with+55+inch+horizontal+touch+screen+panel', 'Sem+nome', '263xcl', 'grass', 'Plant+wall (1)', 'book+chest', 'Kids+toys', 'Wooden+bookcase+decor', 'cp_sport_1950_1200_500_2015_08_22', 'plant+wall+pannel', 'Antique+Lamp', 'Lamp-Flowers', 'street+lamps', 'street+lamps', 'street+lamps', 'yiliaobox', 'bulletin+board (1)']
@@ -75,6 +76,16 @@ function PublishProject(props) {
                 <Button variant="contained" size="large" sx={{margin: '0 0 10px 10px', display: 'flex'}}>保存</Button>
               </Box>
               <Model ref1={_ref} {...props}/>
+              <Typography
+                  variant="h6"
+                  noWrap
+                  component="div"
+                  sx={{mr: 2, display: 'flex', margin: '15px 10px'}}
+              >
+                当前选中模型为:
+                <Button variant={"outlined"} size={"medium"}
+                        style={{color: '#8d6e63', border: '1px solid #8d6e63', marginLeft: 200}}>删除</Button>
+              </Typography>
             </Paper>
             <Paper elevation={3} sx={{borderRadius: 5}}>
               <Box id={"model-lib"} sx={{display: 'flex', alignItems: 'flex-end', padding: '15px 20px'}}>
@@ -101,6 +112,7 @@ function PublishProject(props) {
                   >
                     {renderRow}
                   </FixedSizeList>
+                  {/*<CardList/>*/}
                 </Box>
               </Container>
               <Typography
