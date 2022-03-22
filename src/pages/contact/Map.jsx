@@ -31,8 +31,9 @@ export default function MyMap(props) {
   })
 
   return (
-      <div style={{height:'100%', width:'100%'}}>
-        <Map onClick={(e) => {
+      <div>
+        {/*<div style={{height:'100%', width:'50%'}}>*/}
+        <Map id={"dituContent"} onClick={(e) => {
           getLocation(e.latlng.lat,e.latlng.lng)
           console.log((e.latlng.lat),(e.latlng.lng))
         }} enableScrollWheelZoom={true} center={{lng: latlng.lng, lat: latlng.lat}} zoom="16">

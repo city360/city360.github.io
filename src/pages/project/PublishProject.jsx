@@ -48,7 +48,7 @@ function PublishProject(props) {
   return (
       <Box sx={{flexGrow: 1, display: 'flex'}}>
         {/*<Box sx={{flexGrow: 1, display: 'flex', marginTop:10}}>*/}
-        <Container>
+        <Container sx={{marginTop:5}}>
           <Box
               sx={{
                 display: 'flex',
@@ -61,7 +61,7 @@ function PublishProject(props) {
               }}
           >
             <Paper id={"model-paper"} elevation={3} sx={{borderRadius: 5}}>
-              <Box id={"model-box"} sx={{display: 'flex', alignItems: 'flex-end', padding: '15px 70px'}}>
+              <Box id={"model-box"} sx={{display: 'flex', alignItems: 'flex-end', padding: '15px 60px'}}>
                 <ModeEditIcon sx={{color: 'action.active', mr: 1, my: 0.5, display: 'flex'}}/>
                 <Typography
                     variant="h5"
@@ -71,7 +71,7 @@ function PublishProject(props) {
                 >
                   模型编辑器
                 </Typography>
-                <SelectVariants minWidth={240}/>
+                <SelectVariants minWidth={130}/>
                 <Button variant="contained" size="large" sx={{margin: '0 0 10px 10px', display: 'flex'}}>保存</Button>
               </Box>
               <Model ref1={_ref} {...props}/>

@@ -165,7 +165,9 @@ const ResponsiveAppBar = () => {
               </Box>
               <Box sx={{flexGrow: 0}}>
                 <Button sx={{my: 2, color: 'black', display: 'block'}}>
-                  登录
+                  <Link to={"/login"}>
+                    登录
+                  </Link>
                 </Button>
               </Box>
             </Toolbar>
