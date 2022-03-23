@@ -7,6 +7,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import ReactCompareImage from "react-compare-image";
 import {Parallax} from "react-parallax";
+import {Link} from "react-router-dom";
 
 const strs = ["快速发布、准确定位。\n",
   "个性化定制，模块化定制。\n",
@@ -41,8 +42,16 @@ export default class Home extends React.Component {
                   提供畸零空间活化全流程服务
                 </Typography>
                 <Typography sx={{mb: 1.5, margin: '30px 10px', fontSize: '30px', textAlign: 'center'}} color="#8d6e63">
-                  <Button variant={"contained"} size={"large"} style={{margin:'0 20px'}}>查看已发布的项目</Button>
-                  <Button variant={"outlined"} size={"large"} style={{color:'#8d6e63', border:'1px solid #8d6e63'}}>发布新的项目</Button>
+                  <Button variant={"contained"} size={"large"} style={{margin:'0 20px'}}>
+                    <Link to={"/all-projects"}>
+                      查看已发布的项目
+                    </Link>
+                    </Button>
+                  <Button variant={"outlined"} size={"large"} style={{color:'#8d6e63', border:'1px solid #8d6e63'}}>
+                    <Link to={"/publish-project"} style={{color:"#8d6e63"}}>
+                      发布新的项目
+                    </Link>
+                  </Button>
                 </Typography>
               </div>
           </Parallax>
@@ -157,12 +166,12 @@ export default class Home extends React.Component {
                   marginTop:'80px'
                 }}
             >
-              {/*是什么*/}
+              {/*图片对比*/}
               <Paper elevation={0} style={{margin:'0 auto'}}>
                 <ReactCompareImage leftImage={imgBefore} rightImage={imgAfter}/>
               </Paper>
 
-              {/*价值*/}
+              {/*文字说明*/}
               <Paper elevation={0} style={{margin:'0 auto'}}>
                 <Container sx={{margin:'5px auto'}}>
                   <Typography marginBottom={2} variant="h5" component="div" sx={{textAlign: 'center'}}>
@@ -205,7 +214,9 @@ export default class Home extends React.Component {
               {str}
             </Typography>))}
             <Divider style={{marginTop:50}}/>
-
+            <Typography sx={{mt: 6, margin: '30px auto 20px', fontSize: '20px', textAlign: 'center'}} color="#8d6e63">
+              畸零空间的设计导则
+            </Typography>
           </Container>
           <Parallax bgImage={imgFourth} blur={9} strength={500}>
             <div style={{ backgroundColor:'rgba(7,5,5,0.42)', height: 600, }}>

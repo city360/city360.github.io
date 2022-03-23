@@ -14,6 +14,7 @@ import Contact from "./pages/contact/Contact";
 import {Suspense} from "react";
 import App from "./pages/login";
 import Paralex from "./components/Paralex";
+import AllProjects from "./pages/project/AllProjects";
 
 const theme = createTheme({
   palette: {
@@ -41,6 +42,7 @@ ReactDOM.render(
                 <Route path="publish-project" element={<PublishProject model_path='models/charge/' model_name='167'/>}/>
                 <Route path="view-project" element={<ViewProject/>}/>
                 <Route path="contact-us" element={<Contact/>}/>
+                <Route path="all-projects" element={<AllProjects/>}/>
                 <Route path="models" element={<Models/>}/>
               </Routes>
             </div>
