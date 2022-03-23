@@ -28,7 +28,7 @@ function PublishProject(props) {
     const { index, style } = props;
     return (
         <ListItem style={style} key={index} component="div" disablePadding>
-          <ImgMediaCard addModel={addModel} pic_url={pic_urls[index]} model_path={model_paths[index]} model_name={model_names[index]} money={money[index]}/>
+          <ImgMediaCard content={model_paths[index]} addModel={addModel} pic_url={pic_urls[index]} model_path={model_paths[index]} model_name={model_names[index]} money={money[index]}/>
         </ListItem>
     );
   }

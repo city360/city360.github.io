@@ -9,6 +9,10 @@ import {List, ListItem} from "@mui/material";
 import ListItemText from "@mui/material/ListItemText";
 import DialogContentText from "@mui/material/DialogContentText";
 import MyMap from "../pages/contact/Map";
+import Typography from "@mui/material/Typography";
+import OutlineButton from "./OutlineButton";
+
+const colors = ['red', 'blue', 'black', 'purple']
 
 export default function DialogSelect() {
   const [open, setOpen] = React.useState(false);
@@ -46,27 +50,18 @@ export default function DialogSelect() {
                 tabIndex={-1}
             >
               <List>
-                <ListItem button sx={{color: 'red'}}>
+                {colors.map(color => (<ListItem button sx={{color: color}}>
                   <Box sx={{flexGrow: 1, display: 'flex'}}>
-                    <ListItemText sx={{color: 'red'}} primary={"红色"}/>
+                    <ListItemText sx={{color: color}} primary={color}/>
                   </Box>
-                </ListItem>
-                <ListItem button sx={{color: 'red'}}>
-                  <Box sx={{flexGrow: 1, display: 'flex'}}>
-                    <ListItemText sx={{color: 'red'}} primary={"红色"}/>
-                  </Box>
-                </ListItem>
-                <ListItem button sx={{color: 'red'}}>
-                  <Box sx={{flexGrow: 1, display: 'flex'}}>
-                    <ListItemText sx={{color: 'red'}} primary={"红色"}/>
-                  </Box>
-                </ListItem>
+                </ListItem>))}
               </List>
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>取消</Button>
-            <Button onClick={handleClose}>确认</Button>
+            <OutlineButton onClick={handleClose}>
+              确认
+            </OutlineButton>
           </DialogActions>
         </Dialog>
       </div>

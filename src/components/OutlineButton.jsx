@@ -9,6 +9,6 @@ import * as React from "react";
  */
 export default function  OutlineButton(props){
   return(
-      <Button variant={"outlined"} size={"large"} style={{color:'#8d6e63', border:'1px solid #8d6e63'}}>{props.children}</Button>
+      <Button onClick={props.onClick} variant={"outlined"} size={"large"} style={{color:'#8d6e63', border:'1px solid #8d6e63'}}>{props.children}</Button>
   )
 }

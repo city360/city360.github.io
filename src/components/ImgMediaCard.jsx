@@ -9,7 +9,8 @@ import FilledButton from "./FilledButton";
 import {Button} from "@mui/material";
 import BasicTabs from "./BasicTabs";
 import DialogSelect from "./DialogSelect";
-
+import AlertDialogSlide from "./AlertDialogSlide";
+import {useRef} from "react";
 
 
 /**
@@ -19,7 +20,23 @@ import DialogSelect from "./DialogSelect";
  * @constructor
  */
 export default function ImgMediaCard(props) {
+  const [open, setOpen] = React.useState(false)
+  /**
+   * 通过useRef获取到Dialog的点击事件
+   * @type {React.MutableRefObject<undefined>}
+   * @private
+   */
+  const _ref = useRef()
+  const openDialog = ()=>{
+    _ref.current.handleClickOpen();
+  }
   // console.log(props)
+  /**
+   * 增加模型，通过父组件的addModel来调用兄弟组件的函数
+   * @param model_path
+   * @param model_name
+   * @param money
+   */
   const addModel=(model_path,model_name,money)=>{
     props.addModel(model_path,model_name,money);
   }
@@ -41,18 +58,17 @@ export default function ImgMediaCard(props) {
             {props.pic_url.split('.')[0]}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {props.content}
           </Typography>
         </CardContent>
         <CardActions>
-          <OutlineButton>详情</OutlineButton>
+          <OutlineButton onClick={()=>{
+            openDialog()
+          }}>详情</OutlineButton>
           <Button onClick={()=>{addModel(props.model_path,props.model_name,props.money)}} variant={"contained"} size={"large"} style={{margin:'0 20px'}}>
             置入
           </Button>
-          {/*<FilledButton>*/}
-          {/*  置入*/}
-          {/*</FilledButton>*/}
+          <AlertDialogSlide content={props.content} ref1={_ref} open={open}/>
         </CardActions>
       </Card>
   );

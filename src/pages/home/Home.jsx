@@ -33,7 +33,7 @@ export default class Home extends React.Component {
   render() {
     return (
         <div>
-          <Parallax bgImage={"img/img.png"} strength={300}>
+          <Parallax bgImage={imgFirst} strength={300}>
             <div style={{ height: 600 }}>
                 <Typography sx={{mt: 6, margin: '120px auto 20px', fontSize: '80px', textAlign: 'center'}} color="#8d6e63">
                   城市360
@@ -129,11 +129,12 @@ export default class Home extends React.Component {
             </Box>
 
           <Parallax bgImage={imgSecond} blur={9} strength={500}>
-            <div style={{ backgroundColor:'rgba(7,5,5,0.42)', height: 600, }}>
+            <div style={{ backgroundColor:'rgba(7,5,5,0.42)', height: 400, }}>
               <Typography variant={'h5'} sx={{
                 position: "absolute",
                 top: "50%",
                 left: "50%",
+                textAlign:'center',
                 transform: "translate(-50%,-50%)" }} color="white">
                 让畸零空间成为在城市公共空间之中，使人们交谈、娱乐、休憩的场所
               </Typography>
@@ -194,12 +195,14 @@ export default class Home extends React.Component {
             </Box>
           </Container>
           <Parallax bgImage={imgThird} blur={9} strength={500}>
-            <div style={{ backgroundColor:'rgba(7,5,5,0.42)', height: 600, }}>
+            <div style={{ backgroundColor:'rgba(7,5,5,0.42)', height: 400, }}>
               <Typography variant={'h5'} sx={{
                 position: "absolute",
                 top: "50%",
                 left: "50%",
-                transform: "translate(-50%,-50%)" }} color="white">
+                transform: "translate(-50%,-50%)",
+                textAlign:'center'
+              }} color="white">
                 连接政府与设计师，提供畸零空间设计导则与装配式设计方案简化设计成本
               </Typography>
             </div>
@@ -219,11 +222,12 @@ export default class Home extends React.Component {
             </Typography>
           </Container>
           <Parallax bgImage={imgFourth} blur={9} strength={500}>
-            <div style={{ backgroundColor:'rgba(7,5,5,0.42)', height: 600, }}>
+            <div style={{ backgroundColor:'rgba(7,5,5,0.42)', height: 400, }}>
               <Typography variant={'h5'} sx={{
                 position: "absolute",
                 top: "50%",
                 left: "50%",
+                textAlign:'center',
                 transform: "translate(-50%,-50%)" }} color="white">
                 根据畸零空间不同的环境和形态设计不同的解决方案
               </Typography>
