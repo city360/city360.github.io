@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter, Route, Routes} from "react-router-dom";
-import PublishProject from "./pages/project/PublishProject";
+import PublishProject from "./pages/project/Publish2";
+// import PublishProject from "./pages/project/PublishProject";
 import ViewProject from "./pages/view/ViewProject";
 import NavBar from "./components/NavBar";
 import {Container, createTheme} from "@mui/material";

@@ -2,28 +2,6 @@
     box-sizing: border-box;
 }
 
-html,
-body {
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    font-family: "avenir next", avenir, -apple-system, BlinkMacSystemFont,
-    "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", arial,
-    sans-serif;
-    color: #374047;
-}
-
-#root {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
 
 .main {
     display: flex;
@@ -39,7 +17,7 @@ body {
     align-items: stretch;
     justify-content: space-between;
     /*background: white;*/
-    background: linear-gradient(200deg, #f9f6fa, #fdfafa 100%);
+    background: linear-gradient(200deg, #fffeff, #fdfafa 100%);
     /*background: linear-gradient(200deg, #2a3267c4, #fdfafa 100%);*/
 }
 
