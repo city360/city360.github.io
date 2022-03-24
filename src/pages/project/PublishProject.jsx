@@ -62,20 +62,32 @@ function PublishProject(props) {
               }}
           >
             <Paper id={"model-paper"} elevation={3} sx={{borderRadius: 5}}>
-              <Box id={"model-box"} sx={{display: 'flex', alignItems: 'flex-end', padding: '15px 60px'}}>
-                <ModeEditIcon sx={{color: 'action.active', mr: 1, my: 0.5, display: 'flex'}}/>
-                <Typography
-                    variant="h5"
-                    noWrap
-                    component="div"
-                    sx={{mr: 2, display: 'flex'}}
-                >
-                  模型编辑器
-                </Typography>
-                <SelectVariants minWidth={130}/>
-                <Button variant="contained" size="large" sx={{margin: '0 0 10px 10px', display: 'flex'}}>保存</Button>
-              </Box>
-              <Model ref1={_ref} {...props}/>
+              <Container>
+                {/*<Box id={"model-box"} sx={{*/}
+                {/*  display: 'flex',*/}
+                {/*  flexWrap: 'wrap',*/}
+                {/*  '& > :not(style)': {*/}
+                {/*    m: 1,*/}
+                {/*    maxWidth: 300,*/}
+                {/*    maxHeight: 200,*/}
+                {/*  },*/}
+                {/*}}>*/}
+                  <Box id={"model-box"} sx={{display: 'flex', alignItems: 'flex-end'}}>
+                  <ModeEditIcon sx={{color: 'action.active', mr: 1, my: 0.5, display: 'flex'}}/>
+                  <Typography
+                      variant="h5"
+                      // noWrap
+                      component="div"
+                      sx={{mr: 2, display: 'flex'}}
+                  >
+                    模型编辑器
+                  </Typography>
+                  <SelectVariants minWidth={130}/>
+                  <Button variant="contained" size="large" sx={{margin: '0 0 10px 10px', display: 'flex'}}>保存</Button>
+                </Box>
+                <Model ref1={_ref} {...props}/>
+              </Container>
+
               <Typography
                   variant="h6"
                   noWrap

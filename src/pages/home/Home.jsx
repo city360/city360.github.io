@@ -8,6 +8,7 @@ import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import ReactCompareImage from "react-compare-image";
 import {Parallax} from "react-parallax";
 import {Link} from "react-router-dom";
+import MyCard from "./MyCard";
 
 const strs = ["快速发布、准确定位。\n",
   "个性化定制，模块化定制。\n",
@@ -55,79 +56,7 @@ export default class Home extends React.Component {
                 </Typography>
               </div>
           </Parallax>
-            <Box
-                sx={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  '& > :not(style)': {
-                    m: 5,
-                    width: 300,
-                    height: 450,
-                  },
-                  marginTop:'80px'
-                }}
-            >
-              {/*是什么*/}
-              <Paper elevation={0} style={{margin:'0 auto'}}>
-                <GroupIcon
-                    sx={{
-                      textAlign: 'center',
-                      display: 'block',
-                      margin: '10px auto',
-                      fontSize: '45px',
-                      color: '#8d6e63'
-                    }}/>
-                <Typography variant="h5" component="div" sx={{textAlign: 'center'}}>
-                  “城市360”是什么？
-                </Typography>
-                <Typography sx={{mb: 1.5, margin: '10px 10px', lineHeight: '30px'}} color="text.secondary">
-                  城市空间中，楼与楼之间、社区与社区之间，不同的形式种类作用的建筑群中间会不可避免地产生一些空间上的浪费。城市空间结构中相对不规则、零散的、细碎的、畸形的空间，被称为畸零空间。
-                </Typography>
-              </Paper>
-
-              {/*价值*/}
-              <Paper elevation={0} style={{margin:'0 auto'}}>
-                <SettingsIcon
-                    sx={{
-                      textAlign: 'center',
-                      display: 'block',
-                      margin: '10px auto',
-                      fontSize: '45px',
-                      color: '#8d6e63'
-                    }}/>
-                <Typography variant="h5" component="div" sx={{textAlign: 'center'}}>
-                  “城市360”之价值？
-                </Typography>
-                <Typography sx={{mb: 1.5, margin: '10px 10px'}} color="text.secondary">
-                  助力政府管理：城市空间智慧管理，化“被动管理”为“主动服务”。
-                </Typography>
-                <Typography sx={{mb: 1.5, margin: '10px 10px'}} color="text.secondary">
-                  唤醒社会认知：“互联网+更新”模式多键互联，加强人文体验。
-                </Typography>
-                <Typography sx={{mb: 1.5, margin: '10px 10px'}} color="text.secondary">
-                  推进产教结合：“互联网+公益”理念整合资源，提供公益平台。
-                </Typography>
-              </Paper>
-
-              {/*优势*/}
-              <Paper elevation={0} style={{margin:'0 auto'}}>
-                <FmdGoodIcon
-                    sx={{
-                      textAlign: 'center',
-                      display: 'block',
-                      margin: '10px auto',
-                      fontSize: '45px',
-                      color: '#8d6e63'
-                    }}/>
-                <Typography variant="h5" component="div" sx={{textAlign: 'center', margin: '5px'}}>
-                  “城市360”的优势？
-                </Typography>
-                {strs.map(str => (<Typography key={str} sx={{lineHeight: '30px'}} color="text.secondary">
-                  {str}
-                </Typography>))}
-              </Paper>
-            </Box>
-
+          <MyCard/>
           <Parallax bgImage={imgSecond} blur={9} strength={500}>
             <div style={{ backgroundColor:'rgba(7,5,5,0.42)', height: 400, }}>
               <Typography variant={'h5'} sx={{

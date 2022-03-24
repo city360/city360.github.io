@@ -1,219 +1,185 @@
+import React from "react";
 import * as THREE from 'three';
 
-
-import {DragControls} from "three/examples/jsm/controls/DragControls";
 import {OBJLoader} from "three/examples/jsm/loaders/OBJLoader";
 import {DDSLoader} from "three/examples/jsm/loaders/DDSLoader";
 import {MTLLoader} from "three/examples/jsm/loaders/MTLLoader";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {TransformControls} from "three/examples/jsm/controls/TransformControls";
-import {useEffect} from "react";
 
 let container;
-let camera
-let controls, group;
-let enableSelection = false;
 
-const objects = [];
+let camera, scene, renderer;
 
-const mouse = new THREE.Vector2(), raycaster = new THREE.Raycaster();
+let tran
+let mouseX = 0, mouseY = 0;
 
-let cameraPersp, cameraOrtho, currentCamera;
-let scene, renderer, control, orbit;
+let object;
+let rayCaster = new THREE.Raycaster();
+/**
+ * 这个manager看起来是可以复用的
+ * @type {LoadingManager}
+ */
+const manager = new THREE.LoadingManager();
+manager.addHandler(/\.dds$/i, new DDSLoader());
 
-
-function init() {
-
-  //设置renderer
-  renderer = new THREE.WebGLRenderer();
-  renderer.setPixelRatio( window.devicePixelRatio );
-  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth*0.75)
-  document.getElementById("model2").appendChild( renderer.domElement );
-
-
-  //设置Camera
-  const aspect = window.innerWidth / window.innerHeight;
-
-  cameraPersp = new THREE.PerspectiveCamera( 50, aspect, 0.01, 30000 );
-  cameraOrtho = new THREE.OrthographicCamera( - 600 * aspect, 600 * aspect, 600, - 600, 0.01, 30000 );
-  currentCamera = cameraPersp;
-
-  currentCamera.position.set( 1000, 500, 1000 );
-  currentCamera.lookAt( 0, 200, 0 );
+/**
+ * 一个mtl loader
+ * @type {MTLLoader}
+ */
+const loader = new MTLLoader(manager);
 
 
-  //设置Scene
+/**
+ * 模型
+ */
+class Model extends React.Component {
+  constructor(props) {
+    // console.log(props)
+    super(props);
+    this.props.ref1.current = {
+      addModel:(model_path,model_name)=>{
+        addModel(model_path,model_name);
+      }
+    }
+    this.state = {...props}
+    // this.state = {model_path: props.model_path, model_name: props.model_name}
+  }
+
+
+  render() {
+    return (
+        <div id={"model"}/>
+    )
+  }
+
+  addModel = (model_path, model_name) => {
+    addModel(model_path, model_name)
+  };
+
+  /**
+   * 进行模型的渲染
+   */
+  componentDidMount() {
+    init(this.state.model_path, this.state.model_name);
+    animate()
+
+    // addModel(this.state.model_path, this.state.model_name);
+  }
+
+}
+
+
+// models
+
+function onProgress(xhr) {
+
+  if (xhr.lengthComputable) {
+
+    const percentComplete = xhr.loaded / xhr.total * 100;
+    console.log('model ' + Math.round(percentComplete, 2) + '% downloaded');
+
+  }
+
+}
+
+function onError() {
+}
+
+function init(model_path, model_name) {
+
+  container = document.createElement('div');
+  document.getElementById('model').appendChild(container);
+
+  camera = new THREE.PerspectiveCamera(450, window.innerWidth / window.innerHeight, 1, 10000);
+  camera.position.set(40, 40, 60);
+
+  // scene
+
   scene = new THREE.Scene();
-  scene.add( new THREE.GridHelper( 1000, 10, 0x888888, 0x444444 ) );
 
-  //设置灯光
-  const light = new THREE.DirectionalLight( 0xffffff, 2 );
-  light.position.set( 1, 1, 1 );
-  scene.add( light );
+  const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
+  scene.add(ambientLight);
 
-  const texture = new THREE.TextureLoader().load( 'textures/crate.gif', render );
-  texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  const pointLight = new THREE.PointLight(0xffffff, 0.8);
+  camera.add(pointLight);
+  scene.add(camera);
 
-  const geometry = new THREE.BoxGeometry( 200, 200, 200 );
-  const material = new THREE.MeshLambertMaterial( { map: texture, transparent: true } );
+  renderer = new THREE.WebGLRenderer({antialias: true});
+  renderer.setClearColor('rgb(213,213,213)', 1.0);
+  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth * 0.9)
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1;
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  const grid = new THREE.GridHelper(5000, 30, 0xffffff, 0xffffff);
+  grid.material.opacity = 0.8;
+  grid.material.depthWrite = false;
+  grid.material.transparent = true;
+  scene.add(grid)
 
 
-  //下面是控制的加入
-  orbit = new OrbitControls( currentCamera, renderer.domElement );
+  container.appendChild(renderer.domElement);
+  const orbit = new OrbitControls(camera, renderer.domElement);
+  orbit.addEventListener('change', render); // use if there is no animation loop
+  orbit.minDistance = 400;
+  orbit.maxDistance = 10000;
+  orbit.target.set(0, 0, 0);
   orbit.update();
-  orbit.addEventListener( 'change', render );
 
-  console.log(renderer.domElement)
-  control = new TransformControls( currentCamera, renderer.domElement );
-  console.log(control)
-  control.addEventListener( 'change', render );
+  tran = new TransformControls(camera, renderer.domElement);
+  tran.addEventListener('change', render);
 
-  control.addEventListener( 'dragging-changed', function ( event ) {
+  tran.addEventListener('dragging-changed', function (event) {
+    orbit.enabled = !event.value;
+  });
 
-    orbit.enabled = ! event.value;
 
-  } );
+  // addModel(model_path, model_name);
 
-  //下生成Mesh放到场景当中
-  const mesh = new THREE.Mesh( geometry, material );
-  scene.add( mesh );
-
-  control.attach( mesh );
-  scene.add( control );
-
-  window.addEventListener( 'resize', onWindowResize );
-
-  window.addEventListener( 'keydown', function ( event ) {
-
-    switch ( event.keyCode ) {
-
-      case 81: // Q
-        control.setSpace( control.space === 'local' ? 'world' : 'local' );
-        break;
-
-      case 16: // Shift
-        control.setTranslationSnap( 100 );
-        control.setRotationSnap( THREE.MathUtils.degToRad( 15 ) );
-        control.setScaleSnap( 0.25 );
-        break;
-
-      case 87: // W
-        control.setMode( 'translate' );
-        break;
-
-      case 69: // E
-        control.setMode( 'rotate' );
-        break;
-
-      case 82: // R
-        control.setMode( 'scale' );
-        break;
-
-      case 67: // C
-        const position = currentCamera.position.clone();
-
-        currentCamera = currentCamera.isPerspectiveCamera ? cameraOrtho : cameraPersp;
-        currentCamera.position.copy( position );
-
-        orbit.object = currentCamera;
-        control.camera = currentCamera;
-
-        currentCamera.lookAt( orbit.target.x, orbit.target.y, orbit.target.z );
-        onWindowResize();
-        break;
-
-      case 86: // V
-        const randomFoV = Math.random() + 0.1;
-        const randomZoom = Math.random() + 0.1;
-
-        cameraPersp.fov = randomFoV * 160;
-        cameraOrtho.bottom = - randomFoV * 500;
-        cameraOrtho.top = randomFoV * 500;
-
-        cameraPersp.zoom = randomZoom * 5;
-        cameraOrtho.zoom = randomZoom * 5;
-        onWindowResize();
-        break;
-
-      case 187:
-      case 107: // +, =, num+
-        control.setSize( control.size + 0.1 );
-        break;
-
-      case 189:
-      case 109: // -, _, num-
-        control.setSize( Math.max( control.size - 0.1, 0.1 ) );
-        break;
-
-      case 88: // X
-        control.showX = ! control.showX;
-        break;
-
-      case 89: // Y
-        control.showY = ! control.showY;
-        break;
-
-      case 90: // Z
-        control.showZ = ! control.showZ;
-        break;
-
-      case 32: // Spacebar
-        control.enabled = ! control.enabled;
-        break;
-
-      case 27: // Esc
-        control.reset();
-        break;
-
-    }
-
-  } );
-
-  window.addEventListener( 'keyup', function ( event ) {
-
-    switch ( event.keyCode ) {
-
-      case 16: // Shift
-        control.setTranslationSnap( null );
-        control.setRotationSnap( null );
-        control.setScaleSnap( null );
-        break;
-
-    }
-
-  } );
+  window.addEventListener('resize', onWindowResize);
 
 }
 
 function onWindowResize() {
 
-  const aspect = window.innerWidth / window.innerHeight;
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  // console.log(document.getElementById("model-box").offsetWidth)
+  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth * 0.9)
+}
 
-  cameraPersp.aspect = aspect;
-  cameraPersp.updateProjectionMatrix();
-
-  cameraOrtho.left = cameraOrtho.bottom * aspect;
-  cameraOrtho.right = cameraOrtho.top * aspect;
-  cameraOrtho.updateProjectionMatrix();
-
-  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth*0.75)
-
+function animate() {
+  requestAnimationFrame(animate);
   render();
+}
 
+function addModel(model_path, model_name) {
+  loader.setPath(model_path);
+  loader.load(model_name + '.mtl', (materials) => {
+    materials.preload();
+    const objLoader = new OBJLoader(manager);
+    objLoader.setMaterials(materials);
+    objLoader.setPath(model_path);
+    objLoader.load(model_name + '.obj', (object) => {
+      object.position.y = 0;
+      object.position.x = 0;
+      object.position.z = 0;
+      scene.add(object);
+      tran.attach(object)
+      scene.add(tran)
+      // console.log(object)
+    }, onProgress, onError)
+  });
+  render();
 }
 
 function render() {
 
-  renderer.render( scene, currentCamera );
+  camera.lookAt(scene.position);
+
+  renderer.render(scene, camera);
 
 }
-export default function  Model2(props) {
-  useEffect(()=>{
-    init();
-    render();
-  })
-  return(
-      <div id={"model2"}>
-      </div>
-  )
-}
+
+export default Model;
