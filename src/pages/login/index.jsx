@@ -8,13 +8,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLogginActive: true
+      isLogginActive: false
     };
   }
 
   componentDidMount() {
     //Add .right by default
-    this.rightSide.classList.add("right");
+    this.rightSide.classList.add("left");
   }
 
   changeState() {

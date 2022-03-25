@@ -89,11 +89,6 @@ function MyCard() {
                   </Typography>))}
                 </Card>
               </div>
-              {/*{cardData.map((card, i) => (*/}
-              {/*    <div className="column" key={card.id}>*/}
-              {/*        */}
-              {/*    </div>*/}
-              {/*))}*/}
             </div>
           </div>
         </Hero>

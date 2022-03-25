@@ -9,6 +9,7 @@ import ReactCompareImage from "react-compare-image";
 import {Parallax} from "react-parallax";
 import {Link} from "react-router-dom";
 import MyCard from "./MyCard";
+import BasicTable from "../../components/BasicTable";
 
 const strs = ["快速发布、准确定位。\n",
   "个性化定制，模块化定制。\n",
@@ -35,7 +36,7 @@ export default class Home extends React.Component {
     return (
         <div>
           <Parallax bgImage={imgFirst} strength={300}>
-            <div style={{ height: 500 }}>
+            <div style={{ height: 450 }}>
                 <Typography sx={{mt: 6, margin: '120px auto 20px', fontSize: '80px', textAlign: 'center'}} color="#8d6e63">
                   城市360
                 </Typography>
@@ -149,6 +150,7 @@ export default class Home extends React.Component {
             <Typography sx={{mt: 6, margin: '30px auto 20px', fontSize: '20px', textAlign: 'center'}} color="#8d6e63">
               畸零空间的设计导则
             </Typography>
+            {/*<BasicTable/>*/}
           </Container>
           <Parallax bgImage={imgFourth} blur={9} strength={500}>
             <div style={{ backgroundColor:'rgba(7,5,5,0.42)', height: 400, }}>

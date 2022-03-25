@@ -14,7 +14,6 @@ import Contact from "./pages/contact/Contact";
 // import Map from "./pages/contact/Map"
 import {Suspense} from "react";
 import App from "./pages/login";
-import Paralex from "./components/Paralex";
 import AllProjects from "./pages/project/AllProjects";
 import MyCard from "./pages/home/MyCard";
 
