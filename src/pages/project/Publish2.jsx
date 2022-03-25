@@ -77,7 +77,7 @@ function PublishProject(props) {
             >
               当前选中模型为:
               <Button variant={"outlined"} size={"medium"}
-                      style={{color: '#8d6e63', border: '1px solid #8d6e63', marginLeft: 200}}>删除</Button>
+                      style={{color: '#8d6e63', border: '1px solid #8d6e63'}}>删除</Button>
             </Typography>
           </Paper>
         </Container>)

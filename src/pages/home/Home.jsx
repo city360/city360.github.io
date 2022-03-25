@@ -35,7 +35,7 @@ export default class Home extends React.Component {
     return (
         <div>
           <Parallax bgImage={imgFirst} strength={300}>
-            <div style={{ height: 600 }}>
+            <div style={{ height: 500 }}>
                 <Typography sx={{mt: 6, margin: '120px auto 20px', fontSize: '80px', textAlign: 'center'}} color="#8d6e63">
                   城市360
                 </Typography>

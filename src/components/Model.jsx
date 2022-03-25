@@ -107,7 +107,7 @@ function init(model_path, model_name) {
 
   renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setClearColor('rgb(213,213,213)', 1.0);
-  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth * 0.9)
+  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth * 0.48)
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1;
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -146,7 +146,7 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   // console.log(document.getElementById("model-box").offsetWidth)
-  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth * 0.9)
+  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth * 0.48)
 }
 
 function animate() {
