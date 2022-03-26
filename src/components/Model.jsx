@@ -11,11 +11,13 @@ let container;
 
 let camera, scene, renderer;
 
+let currentModel = "0";
 let tran
+const mouse = new THREE.Vector2(), raycaster = new THREE.Raycaster();
 let mouseX = 0, mouseY = 0;
 
 let object;
-let rayCaster = new THREE.Raycaster();
+// let rayCaster = new THREE.Raycaster();
 /**
  * 这个manager看起来是可以复用的
  * @type {LoadingManager}
@@ -37,16 +39,16 @@ class Model extends React.Component {
   constructor(props) {
     super(props);
     this.props.ref1.current = {
-      addModel:(model_path,model_name)=>{
-        addModel(model_path,model_name);
+      addModel: (model_path, model_name) => {
+        addModel(model_path, model_name);
       }
     }
-    this.state={...props}
+    this.state = {...props}
   }
 
   componentWillUnmount() {
     console.log("调用了这个")
-    window.removeEventListener('resize',onWindowResize,true)
+    window.removeEventListener('resize', onWindowResize, true)
   }
 
   render() {
@@ -65,10 +67,10 @@ class Model extends React.Component {
   componentDidMount() {
     init(this.state.model_path, this.state.model_name);
     animate()
-    // addModel(this.state.model_path, this.state.model_name);
+    window.addEventListener('click', onMouseClick, false);
+    window.addEventListener('keydown', deleteModel);
   }
-
-}
+}//end of class
 
 
 // models
@@ -87,6 +89,11 @@ function onProgress(xhr) {
 function onError() {
 }
 
+/**
+ * 初始化
+ * @param model_path
+ * @param model_name
+ */
 function init(model_path, model_name) {
 
   container = document.createElement('div');
@@ -134,28 +141,13 @@ function init(model_path, model_name) {
   tran.addEventListener('dragging-changed', function (event) {
     orbit.enabled = !event.value;
   });
-
-
-  loader.setPath(model_path);
-  loader.load(model_name + '.mtl', (materials) => {
-    materials.preload();
-    const objLoader = new OBJLoader(manager);
-    objLoader.setMaterials(materials);
-    objLoader.setPath(model_path);
-    objLoader.load(model_name + '.obj', (object) => {
-      object.position.y = 0;
-      object.position.x = 0;
-      object.position.z = 0;
-      scene.add(object);
-      // console.log(object)
-    }, onProgress, onError)
-  });
   render();
-
   window.addEventListener('resize', onWindowResize);
-
 }
 
+/**
+ * 屏幕尺寸变化
+ */
 function onWindowResize() {
 
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -164,11 +156,67 @@ function onWindowResize() {
   renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth * 0.8)
 }
 
+/**
+ * 动画
+ */
 function animate() {
   requestAnimationFrame(animate);
   render();
 }
 
+
+/**
+ * 点击模型
+ * @param event
+ */
+function onMouseClick(event) {
+//通过鼠标点击的位置计算出raycaster所需要的点的位置，以屏幕中心为原点，值的范围为-1到1.
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  let intersects = raycaster.intersectObjects(scene.children);
+  if (intersects.length) {
+    //倘若点击事件和场景当中的mesh存在交叉
+    const childs = scene.children
+    for (let i = 0; i < intersects.length; i++) {
+      let uuid = intersects[i].object.uuid
+      for (let i = 0; i < childs.length; i++) {
+        if (childs[i].getObjectByProperty('uuid', uuid) !== undefined && childs[i].type === "Group") {
+          scene.remove(tran)
+          tran.attach(childs[i])
+          scene.add(tran)
+          console.log(childs[i])
+          currentModel = childs[i].uuid
+          return;
+        }
+      }
+    }
+  }
+}
+
+
+/**
+ * 删除模型
+ * @param event
+ */
+function deleteModel(event) {
+  if (event.keyCode === 46) {
+    if (currentModel !== "0") {
+      console.log("事件调用")
+      scene.remove(tran)
+      scene.getObjectByProperty('uuid', currentModel).removeFromParent()
+      console.log(tran)
+      currentModel = "0"
+    }
+  }
+}
+
+
+/**
+ * 添加模型
+ * @param model_path
+ * @param model_name
+ */
 function addModel(model_path, model_name) {
   loader.setPath(model_path);
   loader.load(model_name + '.mtl', (materials) => {
@@ -180,14 +228,21 @@ function addModel(model_path, model_name) {
       object.position.y = 0;
       object.position.x = 0;
       object.position.z = 0;
+      scene.remove(tran)
       scene.add(object);
       tran.attach(object)
       scene.add(tran)
-      // console.log(object)
     }, onProgress, onError)
   });
+  console.log(scene)
   render();
 }
+
+function removeModel(uuid) {
+  const obj = scene.getObjectByProperty('uuid', uuid)
+  obj.removeFromParent();
+}
+
 
 function render() {
 

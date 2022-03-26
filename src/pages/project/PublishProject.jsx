@@ -68,9 +68,6 @@ function PublishProject(props) {
         </ListItem>
     );
   }
-
-  // const [model_path, setPath] = useState('');
-  // const [model_name, setName] = useState('');
   const [price, setPrice] = useState(0)
   /**
    * 第一个Ref是用来获取Model组件当中的函数
@@ -78,20 +75,6 @@ function PublishProject(props) {
    * @private
    */
   const _ref = useRef()
-  // /**
-  //  * 第二个Ref是用来获取模型库label组件的
-  //  * @type {React.MutableRefObject<undefined>}
-  //  * @private
-  //  */
-  // const _ref2=useRef()
-  //
-  //
-  // /**
-  //  * 第三个useRef用来获取项目分类组件的
-  //  * @type {React.MutableRefObject<undefined>}
-  //  * @private
-  //  */
-  // const _ref3 = useRef()
   /**
    * 加入模型，需要加入并且增加模型的价钱
    * @param model_path

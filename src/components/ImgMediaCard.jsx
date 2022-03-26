@@ -25,7 +25,7 @@ import MenuItem from "@mui/material/MenuItem";
  */
 export default function ImgMediaCard(props) {
   const [open, setOpen] = React.useState(false)
-  console.log(props)
+  // console.log(props)
   const model_base_url=props.myClassName
   const img_base_url=props.imgBaseUrl
   const colors=props.model.colors
