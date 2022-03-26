@@ -143,7 +143,7 @@ const assets = [
 	'./js/Menubar.Status.js',
 	'./js/Resizer.js',
 	'./js/Sidebar.js',
-	'./js/Sidebar.Scene.js',
+	'./js/Sidebar.Scene1.js',
 	'./js/Sidebar.Project.js',
 	'./js/Sidebar.Project.Materials.js',
 	'./js/Sidebar.Project.Renderer.js',

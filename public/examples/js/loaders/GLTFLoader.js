@@ -3621,7 +3621,7 @@
 			const json = this.json;
 			const extensions = this.extensions;
 			const sceneDef = this.json.scenes[ sceneIndex ];
-			const parser = this; // THREE.Loader returns THREE.Group, not Scene.
+			const parser = this; // THREE.Loader returns THREE.Group, not Scene1.
 			// See: https://github.com/mrdoob/three.js/issues/18342#issuecomment-578981172
 
 			const scene = new THREE.Group();

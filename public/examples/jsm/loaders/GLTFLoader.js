@@ -3980,7 +3980,7 @@ class GLTFParser {
 		const sceneDef = this.json.scenes[ sceneIndex ];
 		const parser = this;
 
-		// Loader returns Group, not Scene.
+		// Loader returns Group, not Scene1.
 		// See: https://github.com/mrdoob/three.js/issues/18342#issuecomment-578981172
 		const scene = new Group();
 		if ( sceneDef.name ) scene.name = parser.createUniqueName( sceneDef.name );

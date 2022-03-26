@@ -11645,7 +11645,7 @@
 			this._compileMaterial(this._blurMaterial);
 		}
 		/**
-		 * Generates a PMREM from a supplied Scene, which can be faster than using an
+		 * Generates a PMREM from a supplied Scene1, which can be faster than using an
 		 * image if networking bandwidth is low. Optional sigma specifies a blur radius
 		 * in radians to be applied to the scene before PMREM generation. Optional near
 		 * and far planes ensure the scene is rendered in its entirety (the cubeCamera
@@ -35964,7 +35964,7 @@
 
 
 	Scene.prototype.dispose = function () {
-		console.error('THREE.Scene: .dispose() has been removed.');
+		console.error('THREE.Scene1: .dispose() has been removed.');
 	}; //
 
 

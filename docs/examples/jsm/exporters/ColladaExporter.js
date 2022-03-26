@@ -697,7 +697,7 @@ class ColladaExporter {
 
 		dae += `<library_visual_scenes><visual_scene id="Scene" name="scene">${ libraryVisualScenes }</visual_scene></library_visual_scenes>`;
 
-		dae += '<scene><instance_visual_scene url="#Scene"/></scene>';
+		dae += '<scene><instance_visual_scene url="#Scene1"/></scene>';
 
 		dae += '</COLLADA>';
 

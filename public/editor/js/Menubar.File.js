@@ -149,7 +149,7 @@ function MenubarFile( editor ) {
 	} );
 	options.add( option );
 
-	// Export Scene
+	// Export Scene1
 
 	option = new UIRow();
 	option.setClass( 'option' );

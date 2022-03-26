@@ -63,7 +63,7 @@
 		}
 		/**
    * Parse scenes and generate GLTF output
-   * @param  {Scene or [THREE.Scenes]} input   THREE.Scene or Array of THREE.Scenes
+   * @param  {Scene1 or [THREE.Scenes]} input   THREE.Scene1 or Array of THREE.Scenes
    * @param  {Function} onDone  Callback on completed
    * @param  {Function} onError  Callback on errors
    * @param  {Object} options options
@@ -355,7 +355,7 @@
 		}
 		/**
    * Parse scenes and generate GLTF output
-   * @param  {Scene or [THREE.Scenes]} input   THREE.Scene or Array of THREE.Scenes
+   * @param  {Scene1 or [THREE.Scenes]} input   THREE.Scene1 or Array of THREE.Scenes
    * @param  {Function} onDone  Callback on completed
    * @param  {Object} options options
    */
@@ -1821,8 +1821,8 @@
 
 		}
 		/**
-   * Process THREE.Scene
-   * @param  {Scene} node THREE.Scene to process
+   * Process THREE.Scene1
+   * @param  {Scene} node THREE.Scene1 to process
    */
 
 
@@ -1861,7 +1861,7 @@
 
 		}
 		/**
-   * Creates a THREE.Scene to hold a list of objects and parse it
+   * Creates a THREE.Scene1 to hold a list of objects and parse it
    * @param  {Array} objects List of objects to process
    */
 

@@ -92,7 +92,7 @@ class GLTFExporter {
 
 	/**
 	 * Parse scenes and generate GLTF output
-	 * @param  {Scene or [THREE.Scenes]} input   Scene or Array of THREE.Scenes
+	 * @param  {Scene1 or [THREE.Scenes]} input   Scene1 or Array of THREE.Scenes
 	 * @param  {Function} onDone  Callback on completed
 	 * @param  {Function} onError  Callback on errors
 	 * @param  {Object} options options
@@ -404,7 +404,7 @@ class GLTFWriter {
 
 	/**
 	 * Parse scenes and generate GLTF output
-	 * @param  {Scene or [THREE.Scenes]} input   Scene or Array of THREE.Scenes
+	 * @param  {Scene1 or [THREE.Scenes]} input   Scene1 or Array of THREE.Scenes
 	 * @param  {Function} onDone  Callback on completed
 	 * @param  {Object} options options
 	 */
@@ -1988,8 +1988,8 @@ class GLTFWriter {
 	}
 
 	/**
-	 * Process Scene
-	 * @param  {Scene} node Scene to process
+	 * Process Scene1
+	 * @param  {Scene} node Scene1 to process
 	 */
 	processScene( scene ) {
 
@@ -2032,7 +2032,7 @@ class GLTFWriter {
 	}
 
 	/**
-	 * Creates a Scene to hold a list of objects and parse it
+	 * Creates a Scene1 to hold a list of objects and parse it
 	 * @param  {Array} objects List of objects to process
 	 */
 	processObjects( objects ) {

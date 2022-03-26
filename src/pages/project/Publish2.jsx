@@ -2,7 +2,7 @@
 import Model from "../../components/Model";
 import Box from "@mui/material/Box";
 import * as React from "react";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Button, Container, Paper} from "@mui/material";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import Typography from "@mui/material/Typography";
@@ -16,6 +16,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import MyMap from "../contact/Map";
+import Draggable from 'react-draggable';
 import DialogActions from "@mui/material/DialogActions";
 import SearchIcon from '@mui/icons-material/Search';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
@@ -24,17 +25,27 @@ import FilledButton from "../../components/FilledButton";
 
 const model_paths = ['models/moxing/charge/', 'models/moxing/dianziping/', 'models/moxing/flower/', 'models/moxing/gonggaolan/', 'models/moxing/grass/', 'models/moxing/greenwall/', 'models/moxing/guizi1/', 'models/moxing/guizi2/', 'models/moxing/guizi3/', 'models/moxing/guizi4/', 'models/moxing/lighwall/', 'models/moxing/streetlight/', 'models/moxing/streetlight2/', 'models/moxing/streetlight3/', 'models/moxing/streetlight4/', 'models/moxing/streeylight5/', 'models/moxing/yiliaoboz/', 'models/moxing/zhanban1/'];
 const model_names = ['167', 'info+kiosk+with+55+inch+horizontal+touch+screen+panel', 'Sem+nome', '263xcl', 'grass', 'Plant+wall (1)', 'book+chest', 'Kids+toys', 'Wooden+bookcase+decor', 'cp_sport_1950_1200_500_2015_08_22', 'plant+wall+pannel', 'Antique+Lamp', 'Lamp-Flowers', 'street+lamps', 'street+lamps', 'street+lamps', 'yiliaobox', 'bulletin+board (1)']
-const pic_urls = ['images\\xuanran\\3色草坪.png', 'images\\xuanran\\guizi2.png', 'images\\xuanran\\light1.png', 'images\\xuanran\\light2.png', 'images\\xuanran\\light2发光.png', 'images\\xuanran\\light3发光.png', 'images\\xuanran\\light4.png', 'images\\xuanran\\light4发光.png', 'images\\xuanran\\light5.png', 'images\\xuanran\\light5发光.png', 'images\\xuanran\\lihgt3.png', 'images\\xuanran\\充电桩.png', 'images\\xuanran\\公告栏.png', 'images\\xuanran\\公告栏整体.png', 'images\\xuanran\\医疗箱.png', 'images\\xuanran\\展板1.png', 'images\\xuanran\\柜子1.png', 'images\\xuanran\\柜子3.png', 'images\\xuanran\\柜子4.png', 'images\\xuanran\\灯墙.png', 'images\\xuanran\\灯墙白.png', 'images\\xuanran\\电子屏.png', 'images\\xuanran\\绿化墙.png', 'images\\xuanran\\绿化花1m1m.png']
+const pic_urls = ['images\\xuanran\\3色草坪.png', 'images\\xuanran\\guizi2.png', 'images\\xuanran\\light1.png', 'images\\xuanran\\light2.png', 'images\\xuanran\\light2发光.png', 'images\\xuanran\\light3发光.png', 'images\\xuanran\\light4.png', 'images\\xuanran\\light4发光.png', 'images\\xuanran\\light5.png', 'images\\xuanran\\light5发光.png', 'images\\xuanran\\light3.png', 'images\\xuanran\\充电桩.png', 'images\\xuanran\\公告栏.png', 'images\\xuanran\\公告栏整体.png', 'images\\xuanran\\医疗箱.png', 'images\\xuanran\\展板1.png', 'images\\xuanran\\柜子1.png', 'images\\xuanran\\柜子3.png', 'images\\xuanran\\柜子4.png', 'images\\xuanran\\灯墙.png', 'images\\xuanran\\灯墙白.png', 'images\\xuanran\\电子屏.png', 'images\\xuanran\\绿化墙.png', 'images\\xuanran\\绿化花1m1m.png']
 const money=[50, 80, 110, 140, 170, 200, 230, 260, 290, 320, 350, 380, 410, 440, 470, 500];
 
 
+function PaperComponent(props) {
+  return (
+      <Draggable
+          handle="#draggable-dialog-title"
+          cancel={'[class*="MuiDialogContent-root"]'}
+      >
+        <Paper {...props} />
+      </Draggable>
+  );
+}
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  borderRadius: 10,
+  backgroundColor: alpha(theme.palette.common.white, 0.3),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.white, 0.6),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -91,6 +102,9 @@ function PublishProject(props) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState('paper');
 
+  useEffect(()=>{
+    console.log("出现了变化")
+  })
   const handleClickOpen =() => {
     setOpen(true);
   };
@@ -127,7 +141,7 @@ function PublishProject(props) {
                 >
                   模型编辑器
                 </Typography>
-                <SelectVariants minWidth={100}/>
+                <SelectVariants labels={['项目一','项目二']} minWidth={100}/>
                 <Button variant="contained" size="medium" sx={{margin: '0 0 10px 10px', display: 'flex'}}>保存</Button>
                 <Button onClick={handleClickOpen} variant={"outlined"} sx={{margin: '0 0 10px 10px', display: 'flex'}} style={{color:'#8d6e63', border:'1px solid #8d6e63'}}>添加模型</Button>
               </Box>
@@ -148,12 +162,13 @@ function PublishProject(props) {
           <Dialog
               open={open}
               onClose={handleClose}
+              PaperComponent={PaperComponent}
               scroll={scroll}
-              aria-labelledby="scroll-dialog-title"
+              aria-labelledby="draggable-dialog-title"
               aria-describedby="scroll-dialog-description"
               fullWidth
           >
-            <DialogTitle id="scroll-dialog-title">
+            <DialogTitle style={{ cursor: 'move' }} sx={{backgroundColor:'#e1bee7'}} id="draggable-dialog-title">
               <Box sx={{display: 'flex',flex: '1 0 auto', alignItems: 'flex-end'}}>
                 <EmojiObjectsIcon sx={{color: 'action.active', mr: 1, my: 0.5, display: 'flex'}}/>
                 <Typography
@@ -164,6 +179,7 @@ function PublishProject(props) {
                 >
                   我的模型
                 </Typography>
+                <SelectVariants labels={['桌子','椅子']} minWidth={50}/>
                 <Search>
                   <SearchIconWrapper>
                     <SearchIcon />

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter, Route, Routes} from "react-router-dom";
-import PublishProject from "./pages/project/Publish2";
-// import PublishProject from "./pages/project/PublishProject";
+// import PublishProject from "./pages/project/Publish2";
+import PublishProject from "./pages/project/PublishProject";
 import ViewProject from "./pages/view/ViewProject";
 import NavBar from "./components/NavBar";
 import {Container, createTheme} from "@mui/material";
@@ -16,6 +16,7 @@ import {Suspense} from "react";
 import App from "./pages/login";
 import AllProjects from "./pages/project/AllProjects";
 import MyCard from "./pages/home/MyCard";
+// import Test from "./pages/view/Test";/
 
 const theme = createTheme({
   palette: {
@@ -40,7 +41,7 @@ ReactDOM.render(
               <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="login" element={<App/>}/>
-                <Route path="publish-project" element={<PublishProject model_path='models/charge/' model_name='167'/>}/>
+                <Route path="publish-project" element={<PublishProject/>}/>
                 <Route path="view-project" element={<ViewProject/>}/>
                 <Route path="contact-us" element={<Contact/>}/>
                 <Route path="all-projects" element={<AllProjects/>}/>

@@ -2227,7 +2227,7 @@
     </controller>
   </library_controllers>
   <library_visual_scenes>
-    <visual_scene id="Scene" name="Scene">
+    <visual_scene id="Scene1" name="Scene1">
       <node id="Armature" name="Armature" type="NODE">
         <translate sid="location">0 0 0</translate>
         <rotate sid="rotationZ">0 0 1 180</rotate>
@@ -2450,6 +2450,6 @@
     </visual_scene>
   </library_visual_scenes>
   <scene>
-    <instance_visual_scene url="#Scene"/>
+    <instance_visual_scene url="#Scene1"/>
   </scene>
 </COLLADA>

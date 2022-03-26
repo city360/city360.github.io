@@ -207,7 +207,7 @@ export const NodeList = [
 		]
 	},
 	/*{
-		name: 'Scene',
+		name: 'Scene1',
 		icon: '3d-cube-sphere',
 		children: [
 			{

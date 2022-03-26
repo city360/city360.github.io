@@ -1604,7 +1604,7 @@
         },
         "parse": {
           "!type": "fn(json: object) -> +THREE.Object3D",
-          "!doc": "Parse a <em>JSON</em> structure and return an [page:Object3D object] or a [page:Scene scene].<br>\n\t\tFound objects are converted to [page:Mesh] with a [page:BufferGeometry] and a default [page:MeshPhongMaterial].<br>\n\t\tLights are parsed accordingly."
+          "!doc": "Parse a <em>JSON</em> structure and return an [page:Object3D object] or a [page:Scene1 scene].<br>\n\t\tFound objects are converted to [page:Mesh] with a [page:BufferGeometry] and a default [page:MeshPhongMaterial].<br>\n\t\tLights are parsed accordingly."
         }
       },
       "!doc": "A loader for loading a <em>.babylon</em> resource.",
@@ -1669,7 +1669,7 @@
         },
         "parse": {
           "!type": "fn(doc: Document, callBack: function, url: string) -> object",
-          "!doc": "Parse an <em>XML Document</em> and return an [page:Object object] that contain loaded parts: .[page:Scene scene], .[page:Array morphs], .[page:Array skins], .[page:Array animations], .[page:Object dae]"
+          "!doc": "Parse an <em>XML Document</em> and return an [page:Object object] that contain loaded parts: .[page:Scene1 scene], .[page:Array morphs], .[page:Array skins], .[page:Array animations], .[page:Object dae]"
         },
         "setPreferredShading": {
           "!type": "fn(shading: number)",
@@ -4492,7 +4492,7 @@
           "!doc": "Defines whether the renderer should sort the face of each object. Default is true."
         },
         "render": {
-          "!type": "fn(scene: +THREE.Scene, camera: +THREE.Camera)",
+          "!type": "fn(scene: +THREE.Scene1, camera: +THREE.Camera)",
           "!doc": "Render a scene using a camera."
         },
         "clear": {
@@ -4722,7 +4722,7 @@
           "!doc": "Render a geometry group using the camera and with the correct material."
         },
         "render": {
-          "!type": "fn(scene: +THREE.Scene, camera: +THREE.Camera, renderTarget: +THREE.WebGLRenderTarget, forceClear: bool)",
+          "!type": "fn(scene: +THREE.Scene1, camera: +THREE.Camera, renderTarget: +THREE.WebGLRenderTarget, forceClear: bool)",
           "!doc": "Even with forceClear set to true you can prevent certain buffers being cleared by setting either the .autoClearColor, .autoClearStencil or .autoClearDepth properties to false."
         },
         "renderImmediateObject": {
@@ -4825,7 +4825,7 @@
       "!url": "http://threejs.org/docs/#Reference/renderers/webgl/plugins/ShadowMapPlugin",
       "prototype": {
         "render": {
-          "!type": "fn(scene: +THREE.Scene, camera: +THREE.Camera)",
+          "!type": "fn(scene: +THREE.Scene1, camera: +THREE.Camera)",
           "!doc": "Prepares the shadowmaps to be rendered defined in the scene."
         }
       },
@@ -4836,7 +4836,7 @@
       "!url": "http://threejs.org/docs/#Reference/renderers/webgl/plugins/SpritePlugin",
       "prototype": {
         "render": {
-          "!type": "fn(scene: +THREE.Scene, camera: +THREE.Camera)",
+          "!type": "fn(scene: +THREE.Scene1, camera: +THREE.Camera)",
           "!doc": "Renders the sprites defined in the scene."
         }
       },

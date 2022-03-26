@@ -276,7 +276,7 @@
   </library_geometries>
   <library_controllers/>
   <library_visual_scenes>
-    <visual_scene id="Scene" name="Scene">
+    <visual_scene id="Scene1" name="Scene1">
       <node id="Elf01_posed_002" name="Elf01_posed_002" type="NODE">
         <matrix sid="transform">0.1658046 0 0 0.3918409 0 -2.7013e-8 -0.1658046 -0.5659924 0 0.1658046 -2.7013e-8 0 0 0 0 1</matrix>
         <instance_geometry url="#Elf01_posed_002-mesh">
@@ -301,6 +301,6 @@
     </visual_scene>
   </library_visual_scenes>
   <scene>
-    <instance_visual_scene url="#Scene"/>
+    <instance_visual_scene url="#Scene1"/>
   </scene>
 </COLLADA>

@@ -20,7 +20,7 @@
 # META "generator" "X3D-Edit 3.3, https://savage.nps.edu/X3D-Edit"
 # META "license" "../../license.html"
 
-# [Scene] ========== ========== ==========
+# [Scene1] ========== ========== ==========
 
 # WALK mode permits the camera to move around in terrain-following mode. ANY gives the user liberty to change navigation modes if desired.
 # Note that avatarSize must be adjusted to match collision distance between camera and geometry, height of eye above ground, and highest distance that camera is able to walk over..

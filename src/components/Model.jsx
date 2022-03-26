@@ -35,17 +35,19 @@ const loader = new MTLLoader(manager);
  */
 class Model extends React.Component {
   constructor(props) {
-    // console.log(props)
     super(props);
     this.props.ref1.current = {
       addModel:(model_path,model_name)=>{
         addModel(model_path,model_name);
       }
     }
-    this.state = {...props}
-    // this.state = {model_path: props.model_path, model_name: props.model_name}
+    this.state={...props}
   }
 
+  componentWillUnmount() {
+    console.log("调用了这个")
+    window.removeEventListener('resize',onWindowResize,true)
+  }
 
   render() {
     return (
@@ -63,7 +65,6 @@ class Model extends React.Component {
   componentDidMount() {
     init(this.state.model_path, this.state.model_name);
     animate()
-
     // addModel(this.state.model_path, this.state.model_name);
   }
 
@@ -107,7 +108,7 @@ function init(model_path, model_name) {
 
   renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setClearColor('rgb(213,213,213)', 1.0);
-  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth * 0.4)
+  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth * 0.8)
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1;
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -122,7 +123,7 @@ function init(model_path, model_name) {
   container.appendChild(renderer.domElement);
   const orbit = new OrbitControls(camera, renderer.domElement);
   orbit.addEventListener('change', render); // use if there is no animation loop
-  orbit.minDistance = 400;
+  orbit.minDistance = 100;
   orbit.maxDistance = 10000;
   orbit.target.set(0, 0, 0);
   orbit.update();
@@ -135,7 +136,21 @@ function init(model_path, model_name) {
   });
 
 
-  // addModel(model_path, model_name);
+  loader.setPath(model_path);
+  loader.load(model_name + '.mtl', (materials) => {
+    materials.preload();
+    const objLoader = new OBJLoader(manager);
+    objLoader.setMaterials(materials);
+    objLoader.setPath(model_path);
+    objLoader.load(model_name + '.obj', (object) => {
+      object.position.y = 0;
+      object.position.x = 0;
+      object.position.z = 0;
+      scene.add(object);
+      // console.log(object)
+    }, onProgress, onError)
+  });
+  render();
 
   window.addEventListener('resize', onWindowResize);
 
@@ -146,7 +161,7 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   // console.log(document.getElementById("model-box").offsetWidth)
-  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth * 0.4)
+  renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth * 0.8)
 }
 
 function animate() {

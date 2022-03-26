@@ -15,7 +15,7 @@ class SetSceneCommand extends Command {
 		super( editor );
 
 		this.type = 'SetSceneCommand';
-		this.name = 'Set Scene';
+		this.name = 'Set Scene1';
 
 		this.cmdArray = [];
 
