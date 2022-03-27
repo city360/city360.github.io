@@ -25,11 +25,17 @@ let object;
 const manager = new THREE.LoadingManager();
 manager.addHandler(/\.dds$/i, new DDSLoader());
 
+const grid = new THREE.GridHelper(5000, 30, 0xffffff, 0xffffff);
+grid.material.opacity = 0.8;
+grid.material.depthWrite = false;
+grid.material.transparent = true;
+
 /**
  * 一个mtl loader
  * @type {MTLLoader}
  */
 const loader = new MTLLoader(manager);
+container = document.createElement('div');
 
 
 /**
@@ -41,6 +47,9 @@ class Model extends React.Component {
     this.props.ref1.current = {
       addModel: (model_path, model_name) => {
         addModel(model_path, model_name);
+      },
+      changeScene:(model_path,model_name)=>{
+        changeScene(model_path,model_name);
       }
     }
     this.state = {...props}
@@ -65,6 +74,7 @@ class Model extends React.Component {
    * 进行模型的渲染
    */
   componentDidMount() {
+
     init(this.state.model_path, this.state.model_name);
     animate()
     window.addEventListener('click', onMouseClick, false);
@@ -97,8 +107,7 @@ function onError() {
 function init(model_path, model_name) {
 
   container = document.createElement('div');
-  document.getElementById('model').appendChild(container);
-
+  document.getElementById('model').appendChild(container)
   camera = new THREE.PerspectiveCamera(450, window.innerWidth / window.innerHeight, 1, 10000);
   camera.position.set(40, 40, 60);
 
@@ -120,17 +129,13 @@ function init(model_path, model_name) {
   renderer.toneMappingExposure = 1;
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.outputEncoding = THREE.sRGBEncoding;
-  const grid = new THREE.GridHelper(5000, 30, 0xffffff, 0xffffff);
-  grid.material.opacity = 0.8;
-  grid.material.depthWrite = false;
-  grid.material.transparent = true;
   scene.add(grid)
 
 
   container.appendChild(renderer.domElement);
   const orbit = new OrbitControls(camera, renderer.domElement);
   orbit.addEventListener('change', render); // use if there is no animation loop
-  orbit.minDistance = 100;
+  orbit.minDistance = 1000;
   orbit.maxDistance = 10000;
   orbit.target.set(0, 0, 0);
   orbit.update();
@@ -141,6 +146,9 @@ function init(model_path, model_name) {
   tran.addEventListener('dragging-changed', function (event) {
     orbit.enabled = !event.value;
   });
+
+  addModel(model_path,model_name)
+  scene.remove(tran)
   render();
   window.addEventListener('resize', onWindowResize);
 }
@@ -185,7 +193,7 @@ function onMouseClick(event) {
           scene.remove(tran)
           tran.attach(childs[i])
           scene.add(tran)
-          console.log(childs[i])
+          // console.log(childs[i])
           currentModel = childs[i].uuid
           return;
         }
@@ -211,7 +219,25 @@ function deleteModel(event) {
   }
 }
 
-
+/**
+ * 改变场景功能
+ * @param model_path
+ * @param model_name
+ */
+function changeScene(model_path,model_name) {
+  console.log("执行了Model组件当中的changeScene")
+  // document.getElementById("model").removeChild(document.getElementById("model").children[1])
+  // document.getElementById("model").removeChild()
+  container.removeChild(renderer.domElement)
+  console.log(document.getElementById("model"))
+  // console.log(model_path,model_name)
+  // const childs = scene.children
+  // for(let i=0;i<scene.children.length;i++){
+  //   childs[i].removeFromParent()
+  // }
+  init(model_path, model_name);
+  animate()
+}
 /**
  * 添加模型
  * @param model_path

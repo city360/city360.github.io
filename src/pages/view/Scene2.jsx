@@ -25,7 +25,7 @@ const loader = new MTLLoader(manager);
 
 
 /**
- * 这是一个场景
+ * 这是第二个场景，体现在model_path, model_name不一样
  */
 class Scene2 extends React.Component {
   constructor(props) {

@@ -25,7 +25,7 @@ const loader = new MTLLoader(manager);
 
 
 /**
- * 这是一个场景
+ * 这是一个其中的一个场景
  */
 class Scene1 extends React.Component {
   constructor(props) {

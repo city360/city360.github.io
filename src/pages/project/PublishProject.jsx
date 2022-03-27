@@ -17,6 +17,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import model_data from './model_info.json'
+
 console.log(model_data.model_data)
 
 const labels = ['公告栏和展板', '功能类', '绿化类']
@@ -26,6 +27,11 @@ const labels = ['公告栏和展板', '功能类', '绿化类']
 // 使用imgBaseUrl + picturls[index]可以获取图片路径
 
 const myModels = model_data.model_data
+
+//支持场景选择也就是项目选择
+const scene_paths = ['scenes/changdi/originalsite/', 'scenes/wooden/child/', 'scenes/natural/green/', 'scenes/yuzhi/originalsite/']
+const scene_lables = ['项目1', '项目2', '项目3', '项目4']
+const scene_names = ['552', 'child', 'green', '777']
 
 /**
  * 发布项目
@@ -48,6 +54,13 @@ function PublishProject(props) {
     setLabel(event.target.value);
   };
 
+  const [scene_path, setScenePath] = useState(scene_paths[0])
+  const [scene_name, setSceneName] = useState(scene_names[0])
+  const handleChangeScenes = (event) => {
+    console.log("改变了场景")
+    setScene(event.target.value);
+  }
+
   /**
    * 渲染模型库当中的模型列表
    * @param props
@@ -68,6 +81,8 @@ function PublishProject(props) {
         </ListItem>
     );
   }
+
+  const [myScene, setScene] = useState(scene_lables[0])
   const [price, setPrice] = useState(0)
   /**
    * 第一个Ref是用来获取Model组件当中的函数
@@ -86,6 +101,21 @@ function PublishProject(props) {
     setPrice(price + money)
   }
 
+  /**
+   * 改变场景
+   * @param model_path
+   * @param model_name
+   */
+  const changeScene = (model_path, model_name) => {
+    _ref.current.changeScene(model_path, model_name);
+    setPrice(0)
+  }
+
+  /**
+   * 获取分类的index
+   * @param label
+   * @returns {number}
+   */
   const getIndex = (label) => {
     for (let i = 0; i < labels.length; i++) {
       if (labels[i] === label) {
@@ -94,12 +124,36 @@ function PublishProject(props) {
     }
     return -1
   }
+
+
+  /**
+   * 获取场景的index
+   * @param scene_label
+   * @returns {number}
+   */
+  const getSceneIndex = (scene_label) => {
+    for (let i = 0; i < scene_lables.length; i++) {
+      if (scene_lables[i] === scene_label) {
+        console.log(i)
+        return (i)
+      }
+    }
+    console.log(scene_label)
+    console.log("没有找到")
+    return -1
+  }
   const [myClass, setClass] = useState(myModels[0])
   useEffect(() => {
     setClass(myModels[getIndex(myLabel)]);
     // console.log(getIndex(myLabel))
   }, [myLabel])
 
+  useEffect(()=>{
+    console.log("执行了设置")
+    // setScenePath(scene_paths[getSceneIndex(myScene)])
+    // setSceneName(scene_names[getSceneIndex(myScene)])
+    changeScene(scene_paths[getSceneIndex(myScene)],scene_names[getSceneIndex(myScene)])
+  },[myScene])
   return (
       <Box sx={{flexGrow: 1, display: 'flex', marginTop: 3}}>
         <Box
@@ -127,10 +181,42 @@ function PublishProject(props) {
                 >
                   模型编辑器
                 </Typography>
-                <SelectVariants labels={['项目一', '项目二']} minWidth={130}/>
+                <FormControl variant="standard" sx={{m: 1, minWidth: 130}}>
+                  <InputLabel id="scene-select-standard-label">项目选择</InputLabel>
+                  <Select
+                      labelId="scene-select-standard-label"
+                      id="scene-select-standard"
+                      value={myScene}
+                      onChange={handleChangeScenes}
+                      label="项目"
+                  >
+                    {scene_lables.map((label) => (<MenuItem key={label} value={label}>{label}</MenuItem>))}
+                  </Select>
+                </FormControl>
                 <Button variant="contained" size="large" sx={{margin: '0 0 10px 10px', display: 'flex'}}>保存</Button>
               </Box>
-              <Model ref1={_ref} model_path={"scenes/changjing/"} model_name={"666"}/>
+              <Model ref1={_ref} model_path={scene_path} model_name={scene_name}/>
+              {/*{() => {*/}
+              {/*  switch (getSceneIndex(myScene)) {*/}
+              {/*    case 0:*/}
+              {/*      return(*/}
+              {/*          <Model ref1={_ref} model_path={scene_paths[0]} model_name={scene_names[0]}/>*/}
+              {/*      )*/}
+              {/*    case 1:*/}
+              {/*      return(*/}
+              {/*          <Model ref1={_ref} model_path={scene_paths[1]} model_name={scene_names[1]}/>*/}
+              {/*      )*/}
+              {/*    case 2:*/}
+              {/*      return(*/}
+              {/*          <Model ref1={_ref} model_path={scene_paths[2]} model_name={scene_names[2]}/>*/}
+              {/*      )*/}
+              {/*    case 3:*/}
+              {/*      return(*/}
+              {/*          <Model ref1={_ref} model_path={scene_paths[3]} model_name={scene_names[3]}/>*/}
+              {/*      )*/}
+              {/*  }*/}
+              {/*}}*/}
+
             </Container>
             <Typography
                 variant="h6"
@@ -152,7 +238,7 @@ function PublishProject(props) {
                     id="simple-select-standard"
                     value={myLabel}
                     onChange={handleChangeModels}
-                    label="项目"
+                    label="分类"
                 >
                   {labels.map((label) => (<MenuItem key={label} value={label}>{label}</MenuItem>))}
                 </Select>
@@ -181,7 +267,6 @@ function PublishProject(props) {
                 >
                   {renderRow}
                 </FixedSizeList>
-                {/*<CardList/>*/}
               </Box>
             </Container>
             <Typography
