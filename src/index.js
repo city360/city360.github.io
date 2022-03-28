@@ -10,7 +10,8 @@ import {green} from "@mui/material/colors";
 import {ThemeProvider} from "@emotion/react";
 import Home from "./pages/home/Home";
 import Models from "./pages/model/Models";
-import Contact from "./pages/contact/Contact";
+// import Contact from "./pages/contact";
+import Contact from "./pages/contact";
 // import Map from "./pages/contact/Map"
 import {Suspense} from "react";
 import App from "./pages/login";
@@ -44,7 +45,7 @@ ReactDOM.render(
                 <Route path="publish-project" element={<PublishProject/>}/>
                 <Route path="view-project" element={<ViewProject/>}/>
                 <Route path="contact-us" element={<Contact/>}/>
-                <Route path="all-projects" element={<AllProjects/>}/>
+                <Route path="all-projects" element={<ViewProject/>}/>
                 <Route path="models" element={<Models/>}/>
               </Routes>
             </div>

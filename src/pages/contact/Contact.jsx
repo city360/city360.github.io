@@ -1,53 +1,71 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import React from "react";
+
+import "./contact.scss";
 import MyMap from "./Map";
-// import OutlineButton from "../../components/OutlineButton";
-import {TextField} from "@mui/material";
+import {Button} from "@mui/material";
 
-export default function ScrollDialog() {
-  const [open, setOpen] = React.useState(true);
-  const [scroll, setScroll] = React.useState('paper');
-
-  const handleClickOpen =() => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+export default function App() {
   return (
-      <div>
-        <Button onClick={handleClickOpen}>
-          测试
-        </Button>
-        <Dialog
-            open={open}
-            onClose={handleClose}
-            scroll={scroll}
-            aria-labelledby="scroll-dialog-title"
-            aria-describedby="scroll-dialog-description"
-            fullWidth
-        >
-          <DialogTitle id="scroll-dialog-title">联系我们</DialogTitle>
-          <DialogContent dividers={scroll === 'paper'}>
-            <DialogContentText
-                id="scroll-dialog-description"
-                tabIndex={-1}
-            >
+      <div className="contact-container">
+        <div className="contact-title">联系我们</div>
+        <div className="contact-description">
+          欢迎向我们提出建议
+        </div>
+        <div className="contact-block">
+          <div className="block-1">
+            <div className="address">
+              <i className="fas fa-map-marker-alt"></i>
+              <div className="address-details">
+                <p>Location</p>
+                <p>B22 Bakers Street, Glasgow, Scotland</p>
+              </div>
+            </div>
+            <div className="email">
+              <i className="fas fa-envelope"></i>
+              <div className="email-details">
+                <p>Email</p>
+                <p>info@example.com</p>
+              </div>
+            </div>
+            <div className="phone">
+              <i className="fas fa-phone-alt"></i>
+              <div className="phone-details">
+                <p>Call</p>
+                <p>+1 2222 2222 22</p>
+              </div>
+            </div>
+
+            <div className="map">
               <MyMap/>
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>取消</Button>
-            <Button onClick={handleClose}>提交</Button>
-          </DialogActions>
-        </Dialog>
+            </div>
+          </div>
+          <div className="block-2">
+            <form action="#">
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="name">姓名</label>
+                  <input type="text" id="name" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">邮箱</label>
+                  <input type="email" id="email" />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="subject">主题</label>
+                <input type="text" id="subject" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="Message">内容</label>
+                <textarea></textarea>
+              </div>
+              <div className="btn-container">
+                <Button>提交</Button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
   );
 }

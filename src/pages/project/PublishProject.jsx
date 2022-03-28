@@ -1,4 +1,3 @@
-// import Model from "../../components/Model";
 import Model from "../../components/Model";
 import Box from "@mui/material/Box";
 import * as React from "react";
@@ -6,19 +5,17 @@ import {useEffect, useRef, useState} from "react";
 import {Button, Container, Paper} from "@mui/material";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import Typography from "@mui/material/Typography";
-import SelectVariants from "../../components/SelectVariants";
 import ImgMediaCard from '../../components/ImgMediaCard';
 import ListItem from '@mui/material/ListItem';
 import {FixedSizeList} from 'react-window';
-import {FixedSizeGrid as Grid} from 'react-window';
-import CardList from "../../components/CardList";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import model_data from './model_info.json'
 
-console.log(model_data.model_data)
+
+
 
 const labels = ['公告栏和展板', '功能类', '绿化类']
 
@@ -54,8 +51,6 @@ function PublishProject(props) {
     setLabel(event.target.value);
   };
 
-  const [scene_path, setScenePath] = useState(scene_paths[0])
-  const [scene_name, setSceneName] = useState(scene_names[0])
   const handleChangeScenes = (event) => {
     console.log("改变了场景")
     setScene(event.target.value);
@@ -149,9 +144,6 @@ function PublishProject(props) {
   }, [myLabel])
 
   useEffect(()=>{
-    console.log("执行了设置")
-    // setScenePath(scene_paths[getSceneIndex(myScene)])
-    // setSceneName(scene_names[getSceneIndex(myScene)])
     changeScene(scene_paths[getSceneIndex(myScene)],scene_names[getSceneIndex(myScene)])
   },[myScene])
   return (
@@ -195,39 +187,18 @@ function PublishProject(props) {
                 </FormControl>
                 <Button variant="contained" size="large" sx={{margin: '0 0 10px 10px', display: 'flex'}}>保存</Button>
               </Box>
-              <Model ref1={_ref} model_path={scene_path} model_name={scene_name}/>
-              {/*{() => {*/}
-              {/*  switch (getSceneIndex(myScene)) {*/}
-              {/*    case 0:*/}
-              {/*      return(*/}
-              {/*          <Model ref1={_ref} model_path={scene_paths[0]} model_name={scene_names[0]}/>*/}
-              {/*      )*/}
-              {/*    case 1:*/}
-              {/*      return(*/}
-              {/*          <Model ref1={_ref} model_path={scene_paths[1]} model_name={scene_names[1]}/>*/}
-              {/*      )*/}
-              {/*    case 2:*/}
-              {/*      return(*/}
-              {/*          <Model ref1={_ref} model_path={scene_paths[2]} model_name={scene_names[2]}/>*/}
-              {/*      )*/}
-              {/*    case 3:*/}
-              {/*      return(*/}
-              {/*          <Model ref1={_ref} model_path={scene_paths[3]} model_name={scene_names[3]}/>*/}
-              {/*      )*/}
-              {/*  }*/}
-              {/*}}*/}
-
+              <Model ref1={_ref} model_path={scene_paths[getSceneIndex(myScene)]} model_name={scene_names[getSceneIndex(myScene)]}/>
             </Container>
-            <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{mr: 2, display: 'flex', margin: '15px 10px'}}
-            >
-              当前选中模型为:
-              <Button variant={"outlined"} size={"medium"}
-                      style={{color: '#8d6e63', border: '1px solid #8d6e63', marginLeft: 200}}>删除</Button>
-            </Typography>
+            {/*<Typography*/}
+            {/*    variant="h6"*/}
+            {/*    noWrap*/}
+            {/*    component="div"*/}
+            {/*    sx={{mr: 2, display: 'flex', margin: '15px 10px'}}*/}
+            {/*>*/}
+            {/*  当前选中模型为:*/}
+            {/*  <Button variant={"outlined"} size={"medium"}*/}
+            {/*          style={{color: '#8d6e63', border: '1px solid #8d6e63', marginLeft: 200}}>删除</Button>*/}
+            {/*</Typography>*/}
           </Paper>
           <Paper elevation={3} sx={{borderRadius: 5}}>
             <Box id={"model-lib"} sx={{display: 'flex', alignItems: 'flex-end', padding: '15px 20px'}}>
