@@ -6,6 +6,7 @@ import {DDSLoader} from "three/examples/jsm/loaders/DDSLoader";
 import {MTLLoader} from "three/examples/jsm/loaders/MTLLoader";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {TransformControls} from "three/examples/jsm/controls/TransformControls";
+import {exportGLTF} from "../utils";
 
 let container;
 
@@ -135,7 +136,7 @@ function init(model_path, model_name) {
   container.appendChild(renderer.domElement);
   const orbit = new OrbitControls(camera, renderer.domElement);
   orbit.addEventListener('change', render); // use if there is no animation loop
-  orbit.minDistance = 1000;
+  orbit.minDistance = 500;
   orbit.maxDistance = 10000;
   orbit.target.set(0, 0, 0);
   orbit.update();
@@ -256,6 +257,7 @@ function addModel(model_path, model_name) {
       object.position.z = 0;
       scene.remove(tran)
       scene.add(object);
+      exportGLTF(scene)
       tran.attach(object)
       scene.add(tran)
     }, onProgress, onError)
