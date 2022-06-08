@@ -26,10 +26,13 @@ const labels = ['公告栏和展板', '功能类', '绿化类']
 const myModels = model_data.model_data
 
 //支持场景选择也就是项目选择
-const scene_paths = ['scenes/changdi/originalsite/', 'scenes/wooden/child/', 'scenes/natural/green/', 'scenes/yuzhi/originalsite/']
-const scene_lables = ['项目1', '项目2', '项目3', '项目4']
-const scene_names = ['552', 'child', 'green', '777']
+// const scene_paths = ['scenes/changdi/originalsite/', 'scenes/wooden/child/', 'scenes/natural/green/', 'scenes/yuzhi/originalsite/']
+// const scene_lables = ['项目1', '项目2', '项目3', '项目4']
+// const scene_names = ['552', 'child', 'green', '777']
 
+const scene_paths = ['models/moxing/gonggaolanhezhanban/gonggaolan/Steel/']
+const scene_lables = ['项目1']
+const scene_names = ['263xcl']
 /**
  * 发布项目
  * @param props 把props当中的模型信息传递过去
@@ -54,6 +57,7 @@ function PublishProject(props) {
   const handleChangeScenes = (event) => {
     console.log("改变了场景")
     setScene(event.target.value);
+    changeScene(scene_paths[getSceneIndex(myScene)],scene_names[getSceneIndex(myScene)])
   }
 
   /**
@@ -143,9 +147,9 @@ function PublishProject(props) {
     // console.log(getIndex(myLabel))
   }, [myLabel])
 
-  useEffect(()=>{
-    changeScene(scene_paths[getSceneIndex(myScene)],scene_names[getSceneIndex(myScene)])
-  },[myScene])
+  // useEffect(()=>{
+  //   changeScene(scene_paths[getSceneIndex(myScene)],scene_names[getSceneIndex(myScene)])
+  // },[myScene])
   return (
       <Box sx={{flexGrow: 1, display: 'flex', marginTop: 3}}>
         <Box
@@ -180,7 +184,7 @@ function PublishProject(props) {
                       id="scene-select-standard"
                       value={myScene}
                       onChange={handleChangeScenes}
-                      label="项目"
+                      label="项目1"
                   >
                     {scene_lables.map((label) => (<MenuItem key={label} value={label}>{label}</MenuItem>))}
                   </Select>
