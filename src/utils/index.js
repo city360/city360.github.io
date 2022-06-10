@@ -61,7 +61,6 @@ function save( blob, filename ) {
   link.href = URL.createObjectURL( blob );
   link.download = filename;
   link.click();
-
   // URL.revokeObjectURL( url ); breaks Firefox...
 
 }

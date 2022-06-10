@@ -6,8 +6,9 @@ import {DDSLoader} from "three/examples/jsm/loaders/DDSLoader";
 import {MTLLoader} from "three/examples/jsm/loaders/MTLLoader";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {TransformControls} from "three/examples/jsm/controls/TransformControls";
-import {exportGLTF} from "../utils";
-
+import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
+import {exportGLTF, exportToObj} from "../utils";
+const baseUrl = 'http://rcirkt0a3.hd-bkt.clouddn.com/'
 let container;
 
 let camera, scene, renderer;
@@ -39,21 +40,33 @@ const loader = new MTLLoader(manager);
 container = document.createElement('div');
 
 
+async function downloadModel() {
+  // exportToObj(scene)
+  scene.remove(tran)
+  await exportGLTF(scene)
+  scene.add(tran)
+}
+
+
 /**
  * 模型
  */
 class Model extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {...props,scene:scene}
     this.props.ref1.current = {
       addModel: (model_path, model_name) => {
         addModel(model_path, model_name);
       },
       changeScene:(model_path,model_name)=>{
         changeScene(model_path,model_name);
-      }
+      },
+      downloadModel:()=>{
+        downloadModel()
+      },
+      scene:this.state.scene
     }
-    this.state = {...props}
   }
 
   componentWillUnmount() {
@@ -63,12 +76,13 @@ class Model extends React.Component {
 
   render() {
     return (
-        <div id={"model"}/>
+          <div id={"model"}/>
     )
   }
 
   addModel = (model_path, model_name) => {
     addModel(model_path, model_name)
+    this.setState({scene:scene})
   };
 
   /**
@@ -98,6 +112,7 @@ function onProgress(xhr) {
 }
 
 function onError() {
+  downloadModel()
 }
 
 /**
@@ -161,7 +176,7 @@ function onWindowResize() {
 
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-  // console.log(document.getElementById("model-box").offsetWidth)
+  console.log(document.getElementById("model-box").offsetWidth)
   renderer.setSize(document.getElementById("model-box").offsetWidth, document.getElementById("model-box").offsetWidth * 0.8)
 }
 
@@ -196,6 +211,7 @@ function onMouseClick(event) {
           scene.add(tran)
           // console.log(childs[i])
           currentModel = childs[i].uuid
+          console.log(currentModel)
           return;
         }
       }
@@ -245,6 +261,10 @@ function changeScene(model_path,model_name) {
  * @param model_name
  */
 function addModel(model_path, model_name) {
+  // if(model_path===""){
+  //   downloadModel()
+  //   return;
+  // }
   loader.setPath(model_path);
   loader.load(model_name + '.mtl', (materials) => {
     materials.preload();
@@ -256,14 +276,16 @@ function addModel(model_path, model_name) {
       object.position.x = 0;
       object.position.z = 0;
       scene.remove(tran)
-      scene.add(object);
-      exportGLTF(scene)
+      scene.add(object)
+      // downloadModel()
       tran.attach(object)
       scene.add(tran)
     }, onProgress, onError)
   });
   console.log(scene)
+  // scene.add(tran)
   render();
+
 }
 
 function removeModel(uuid) {
