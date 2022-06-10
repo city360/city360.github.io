@@ -190,14 +190,16 @@ function animate() {
 
 
 /**
- * 点击模型
+ * 点击模型进行选中和编辑
  * @param event
  */
 function onMouseClick(event) {
 //通过鼠标点击的位置计算出raycaster所需要的点的位置，以屏幕中心为原点，值的范围为-1到1.
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  console.log(event.clientX)
+  mouse.x =( (event.clientX-document.getElementById('model').getBoundingClientRect().left) / document.getElementById('model').offsetWidth) * 2 - 1;
+  mouse.y = -((event.clientY-document.getElementById('model').getBoundingClientRect().top) / document.getElementById('model').offsetHeight) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
+  console.log(raycaster)
   let intersects = raycaster.intersectObjects(scene.children);
   if (intersects.length) {
     //倘若点击事件和场景当中的mesh存在交叉
@@ -226,8 +228,9 @@ function onMouseClick(event) {
  */
 function deleteModel(event) {
   if (event.keyCode === 46) {
+    console.log("点击删除键成功")
     if (currentModel !== "0") {
-      console.log("事件调用")
+      console.log("删除模型事件调用")
       scene.remove(tran)
       scene.getObjectByProperty('uuid', currentModel).removeFromParent()
       console.log(tran)

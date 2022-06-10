@@ -148,121 +148,121 @@ function PublishProject(props) {
     // console.log(getIndex(myLabel))
   }, [myLabel])
 
-  return (
-      <div>
-        <div id={'model-box'}>这是测试</div>
-        <button onClick={downloadModel}>保存</button>
-        <Model ref1={_ref} model_path={scene_paths[getSceneIndex(myScene)]} model_name={scene_names[getSceneIndex(myScene)]}/>
-      </div>
-
-  )
   // return (
-  //     <Box sx={{flexGrow: 1, display: 'flex', marginTop: 3}}>
-  //       <Box
-  //           sx={{
-  //             display: 'flex',
-  //             flexWrap: 'wrap',
-  //             '& > :not(style)': {
-  //               m: 1,
-  //               // width:650,
-  //               // height:650,
-  //               maxWidth: 900,
-  //               maxHeight: 900,
-  //             },
-  //           }}
-  //       >
-  //         <Paper id={"model-paper"} elevation={3} sx={{borderRadius: 5}}>
-  //           <Container>
-  //             <Box id={"model-box"} sx={{display: 'flex', alignItems: 'flex-end', padding: '0 160px 10px 160px'}}>
-  //               <ModeEditIcon sx={{color: 'action.active', mr: 1, my: 0.5, display: 'flex'}}/>
-  //               <Typography
-  //                   variant="h5"
-  //                   // noWrap
-  //                   component="div"
-  //                   sx={{mr: 2, display: 'flex'}}
-  //               >
-  //                 模型编辑器
-  //               </Typography>
-  //               <FormControl variant="standard" sx={{m: 1, minWidth: 130}}>
-  //                 <InputLabel id="scene-select-standard-label">项目选择</InputLabel>
-  //                 <Select
-  //                     labelId="scene-select-standard-label"
-  //                     id="scene-select-standard"
-  //                     value={myScene}
-  //                     onChange={handleChangeScenes}
-  //                     label="项目1"
-  //                 >
-  //                   {scene_lables.map((label) => (<MenuItem key={label} value={label}>{label}</MenuItem>))}
-  //                 </Select>
-  //               </FormControl>
-  //               <Button variant="contained" size="large" sx={{margin: '0 0 10px 10px', display: 'flex'}} onClick={downloadModel}>保存</Button>
-  //             </Box>
-  //                 <Model ref1={_ref} model_path={scene_paths[getSceneIndex(myScene)]} model_name={scene_names[getSceneIndex(myScene)]}/>
-  //           </Container>
-  //           {/*<Typography*/}
-  //           {/*    variant="h6"*/}
-  //           {/*    noWrap*/}
-  //           {/*    component="div"*/}
-  //           {/*    sx={{mr: 2, display: 'flex', margin: '15px 10px'}}*/}
-  //           {/*>*/}
-  //           {/*  当前选中模型为:*/}
-  //           {/*  <Button variant={"outlined"} size={"medium"}*/}
-  //           {/*          style={{color: '#8d6e63', border: '1px solid #8d6e63', marginLeft: 200}}>删除</Button>*/}
-  //           {/*</Typography>*/}
-  //         </Paper>
-  //         <Paper elevation={3} sx={{borderRadius: 5}}>
-  //           <Box id={"model-lib"} sx={{display: 'flex', alignItems: 'flex-end', padding: '15px 20px'}}>
-  //             <FormControl variant="standard" sx={{m: 1, minWidth: 160}}>
-  //               <InputLabel id="simple-select-standard-label">分类</InputLabel>
-  //               <Select
-  //                   labelId="simple-select-standard-label"
-  //                   id="simple-select-standard"
-  //                   value={myLabel}
-  //                   onChange={handleChangeModels}
-  //                   label="分类"
-  //               >
-  //                 {labels.map((label) => (<MenuItem key={label} value={label}>{label}</MenuItem>))}
-  //               </Select>
-  //             </FormControl>
-  //             <Typography
-  //                 variant="h5"
-  //                 noWrap
-  //                 component="div"
-  //                 sx={{mr: 2, display: 'flex'}}
-  //             >
-  //               模型库
-  //             </Typography>
-  //           </Box>
-  //           <Container sx={{overflow: 'hidden'}}>
-  //             <Box
-  //                 sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}
-  //             >
-  //               {/*这个渲染的应该是每一个大类中的模型*/}
-  //               <FixedSizeList
-  //                   height={560}
-  //                   width={360}
-  //                   itemSize={390}
-  //                   // 渲染的应该是模型，每个模型再去选颜色
-  //                   itemCount={myClass.models.length}
-  //                   overscanCount={5}
-  //               >
-  //                 {renderRow}
-  //               </FixedSizeList>
-  //             </Box>
-  //           </Container>
-  //           <Typography
-  //               variant="h6"
-  //               noWrap
-  //               component="div"
-  //               sx={{mr: 2, display: 'flex', margin: '5px 10px'}}
-  //           >
-  //             总造价: {price}RMB
-  //             <Button variant={"outlined"} size={"medium"}
-  //                     style={{color: '#8d6e63', border: '1px solid #8d6e63', marginLeft: 100}}>置入</Button>
-  //           </Typography>
-  //         </Paper>
-  //       </Box>
-  //     </Box>)
+  //     <div>
+  //       <div id={'model-box'}>这是测试</div>
+  //       <button onClick={downloadModel}>保存</button>
+  //       <Model ref1={_ref} model_path={scene_paths[getSceneIndex(myScene)]} model_name={scene_names[getSceneIndex(myScene)]}/>
+  //     </div>
+  //
+  // )
+  return (
+      <Box sx={{flexGrow: 1, display: 'flex', marginTop: 3}}>
+        <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              '& > :not(style)': {
+                m: 1,
+                // width:650,
+                // height:650,
+                maxWidth: 900,
+                maxHeight: 900,
+              },
+            }}
+        >
+          <Paper id={"model-paper"} elevation={3} sx={{borderRadius: 5}}>
+            <Container>
+              <Box id={"model-box"} sx={{display: 'flex', alignItems: 'flex-end', padding: '0 160px 10px 160px'}}>
+                <ModeEditIcon sx={{color: 'action.active', mr: 1, my: 0.5, display: 'flex'}}/>
+                <Typography
+                    variant="h5"
+                    // noWrap
+                    component="div"
+                    sx={{mr: 2, display: 'flex'}}
+                >
+                  模型编辑器
+                </Typography>
+                <FormControl variant="standard" sx={{m: 1, minWidth: 130}}>
+                  <InputLabel id="scene-select-standard-label">项目选择</InputLabel>
+                  <Select
+                      labelId="scene-select-standard-label"
+                      id="scene-select-standard"
+                      value={myScene}
+                      onChange={handleChangeScenes}
+                      label="项目1"
+                  >
+                    {scene_lables.map((label) => (<MenuItem key={label} value={label}>{label}</MenuItem>))}
+                  </Select>
+                </FormControl>
+                <Button variant="contained" size="large" sx={{margin: '0 0 10px 10px', display: 'flex'}} onClick={downloadModel}>保存</Button>
+              </Box>
+                  <Model ref1={_ref} model_path={scene_paths[getSceneIndex(myScene)]} model_name={scene_names[getSceneIndex(myScene)]}/>
+            </Container>
+            {/*<Typography*/}
+            {/*    variant="h6"*/}
+            {/*    noWrap*/}
+            {/*    component="div"*/}
+            {/*    sx={{mr: 2, display: 'flex', margin: '15px 10px'}}*/}
+            {/*>*/}
+            {/*  当前选中模型为:*/}
+            {/*  <Button variant={"outlined"} size={"medium"}*/}
+            {/*          style={{color: '#8d6e63', border: '1px solid #8d6e63', marginLeft: 200}}>删除</Button>*/}
+            {/*</Typography>*/}
+          </Paper>
+          <Paper elevation={3} sx={{borderRadius: 5}}>
+            <Box id={"model-lib"} sx={{display: 'flex', alignItems: 'flex-end', padding: '15px 20px'}}>
+              <FormControl variant="standard" sx={{m: 1, minWidth: 160}}>
+                <InputLabel id="simple-select-standard-label">分类</InputLabel>
+                <Select
+                    labelId="simple-select-standard-label"
+                    id="simple-select-standard"
+                    value={myLabel}
+                    onChange={handleChangeModels}
+                    label="分类"
+                >
+                  {labels.map((label) => (<MenuItem key={label} value={label}>{label}</MenuItem>))}
+                </Select>
+              </FormControl>
+              <Typography
+                  variant="h5"
+                  noWrap
+                  component="div"
+                  sx={{mr: 2, display: 'flex'}}
+              >
+                模型库
+              </Typography>
+            </Box>
+            <Container sx={{overflow: 'hidden'}}>
+              <Box
+                  sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}
+              >
+                {/*这个渲染的应该是每一个大类中的模型*/}
+                <FixedSizeList
+                    height={560}
+                    width={360}
+                    itemSize={390}
+                    // 渲染的应该是模型，每个模型再去选颜色
+                    itemCount={myClass.models.length}
+                    overscanCount={5}
+                >
+                  {renderRow}
+                </FixedSizeList>
+              </Box>
+            </Container>
+            <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{mr: 2, display: 'flex', margin: '5px 10px'}}
+            >
+              总造价: {price}RMB
+              <Button variant={"outlined"} size={"medium"}
+                      style={{color: '#8d6e63', border: '1px solid #8d6e63', marginLeft: 100}}>置入</Button>
+            </Typography>
+          </Paper>
+        </Box>
+      </Box>)
 }
 
 export default PublishProject;
