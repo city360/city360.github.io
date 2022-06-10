@@ -13,8 +13,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import model_data from './model_info.json'
-
-
+import {exportGLTF} from "../../utils";
 
 
 const labels = ['公告栏和展板', '功能类', '绿化类']
@@ -109,7 +108,9 @@ function PublishProject(props) {
     _ref.current.changeScene(model_path, model_name);
     setPrice(0)
   }
-
+  const downloadModel = ()=>{
+    _ref.current.downloadModel()
+  }
   /**
    * 获取分类的index
    * @param label
@@ -147,9 +148,6 @@ function PublishProject(props) {
     // console.log(getIndex(myLabel))
   }, [myLabel])
 
-  // useEffect(()=>{
-  //   changeScene(scene_paths[getSceneIndex(myScene)],scene_names[getSceneIndex(myScene)])
-  // },[myScene])
   return (
       <Box sx={{flexGrow: 1, display: 'flex', marginTop: 3}}>
         <Box
@@ -189,9 +187,9 @@ function PublishProject(props) {
                     {scene_lables.map((label) => (<MenuItem key={label} value={label}>{label}</MenuItem>))}
                   </Select>
                 </FormControl>
-                <Button variant="contained" size="large" sx={{margin: '0 0 10px 10px', display: 'flex'}}>保存</Button>
+                <Button variant="contained" size="large" sx={{margin: '0 0 10px 10px', display: 'flex'}} onClick={downloadModel}>保存</Button>
               </Box>
-              <Model ref1={_ref} model_path={scene_paths[getSceneIndex(myScene)]} model_name={scene_names[getSceneIndex(myScene)]}/>
+                  <Model ref1={_ref} model_path={scene_paths[getSceneIndex(myScene)]} model_name={scene_names[getSceneIndex(myScene)]}/>
             </Container>
             {/*<Typography*/}
             {/*    variant="h6"*/}
