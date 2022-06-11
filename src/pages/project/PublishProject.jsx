@@ -96,7 +96,8 @@ function PublishProject(props) {
    */
   const addModel = (model_path, model_name, money) => {
     _ref.current.addModel(model_path, model_name);
-    setPrice(price + money)
+    // setPrice(price + money)
+    // console.log("addModel调用")
   }
 
   /**
@@ -157,7 +158,7 @@ function PublishProject(props) {
   //
   // )
   return (
-      <Box sx={{flexGrow: 1, display: 'flex', marginTop: 3}}>
+      <Box sx={{flexGrow: 1, display: 'flex', marginTop: 3, marginLeft:25}}>
         <Box
             sx={{
               display: 'flex',
@@ -250,16 +251,16 @@ function PublishProject(props) {
                 </FixedSizeList>
               </Box>
             </Container>
-            <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{mr: 2, display: 'flex', margin: '5px 10px'}}
-            >
-              总造价: {price}RMB
-              <Button variant={"outlined"} size={"medium"}
-                      style={{color: '#8d6e63', border: '1px solid #8d6e63', marginLeft: 100}}>置入</Button>
-            </Typography>
+            {/*<Typography*/}
+            {/*    variant="h6"*/}
+            {/*    noWrap*/}
+            {/*    component="div"*/}
+            {/*    sx={{mr: 2, display: 'flex', margin: '5px 10px'}}*/}
+            {/*>*/}
+            {/*  /!*总造价: {price}RMB*!/*/}
+            {/*  <Button variant={"outlined"} size={"medium"}*/}
+            {/*          style={{color: '#8d6e63', border: '1px solid #8d6e63', marginLeft: 100}}>置入</Button>*/}
+            {/*</Typography>*/}
           </Paper>
         </Box>
       </Box>)

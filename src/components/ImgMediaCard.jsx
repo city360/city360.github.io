@@ -33,8 +33,6 @@ export default function ImgMediaCard(props) {
   const names=props.model.model_names
   const urls = props.model.pic_urls
 
-
-
   const [model_path, setModelPath]=useState(props.model.model_paths[0])
   const [model_name, setModelName]=useState(props.model.model_names[0])
   const [myColor, setColor] = React.useState(colors[0]);
@@ -129,6 +127,7 @@ export default function ImgMediaCard(props) {
             openDialog()
           }}>详情</OutlineButton>
           <Button onClick={()=>{addModel(model_base_url+model_path,model_name,100)}} variant={"contained"} size={"large"} style={{margin:'0 20px'}}>
+          {/*<Button onClick={()=>{}} variant={"contained"} size={"large"} style={{margin:'0 20px'}}>*/}
             置入
           </Button>
           <AlertDialogSlide content={props.content} ref1={_ref} open={open}/>
