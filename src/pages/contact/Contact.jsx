@@ -14,24 +14,24 @@ export default function App() {
         <div className="contact-block">
           <div className="block-1">
             <div className="address">
-              <i className="fas fa-map-marker-alt"></i>
+              <i className="fa fa-map-marker"></i>
               <div className="address-details">
-                <p>Location</p>
-                <p>B22 Bakers Street, Glasgow, Scotland</p>
+                <p>地址</p>
+                <p>同济大学</p>
               </div>
             </div>
             <div className="email">
-              <i className="fas fa-envelope"></i>
+              <i className="fa fa-envelope"></i>
               <div className="email-details">
-                <p>Email</p>
-                <p>info@example.com</p>
+                <p>邮件</p>
+                <p>city360-tongji@outlook.com</p>
               </div>
             </div>
             <div className="phone">
-              <i className="fas fa-phone-alt"></i>
+              <i className="fa fa-phone"></i>
               <div className="phone-details">
-                <p>Call</p>
-                <p>+1 2222 2222 22</p>
+                <p>电话</p>
+                <p>19821232613</p>
               </div>
             </div>
 

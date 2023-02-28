@@ -2,7 +2,7 @@ import Model from "../../components/Model";
 import Box from "@mui/material/Box";
 import * as React from "react";
 import {useEffect, useRef, useState} from "react";
-import {Button, Container, Paper} from "@mui/material";
+import {Button, Container, Input, Paper} from "@mui/material";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import Typography from "@mui/material/Typography";
 import ImgMediaCard from '../../components/ImgMediaCard';
@@ -14,8 +14,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import model_data from './model_info.json'
 import {exportGLTF} from "../../utils";
+import OutlineButton from "../../components/OutlineButton";
 
-
+const ariaLabel = { 'aria-label': 'description' };
 const labels = ['公告栏和展板', '功能类', '绿化类']
 
 
@@ -25,9 +26,9 @@ const labels = ['公告栏和展板', '功能类', '绿化类']
 const myModels = model_data.model_data
 
 //支持场景选择也就是项目选择
-// const scene_paths = ['scenes/changdi/originalsite/', 'scenes/wooden/child/', 'scenes/natural/green/', 'scenes/yuzhi/originalsite/']
+// const scene_paths = ['scenes/changdi/originalsite/', 'models/moxing/gonggaolanhezhanban/gonggaolan/Steel/', 'scenes/natural/green/', 'scenes/yuzhi/originalsite/']
 // const scene_lables = ['项目1', '项目2', '项目3', '项目4']
-// const scene_names = ['552', 'child', 'green', '777']
+// const scene_names = ['552', '263xcl', 'green', '777']
 
 const scene_paths = ['models/moxing/gonggaolanhezhanban/gonggaolan/Steel/']
 const scene_lables = ['项目1']
@@ -39,7 +40,6 @@ const scene_names = ['263xcl']
  * @constructor
  */
 function PublishProject(props) {
-
 
   /**
    * 设置分类标签
@@ -107,10 +107,13 @@ function PublishProject(props) {
    */
   const changeScene = (model_path, model_name) => {
     _ref.current.changeScene(model_path, model_name);
-    setPrice(0)
+    // setPrice(0)
   }
   const downloadModel = ()=>{
     _ref.current.downloadModel()
+  }
+  const upload = (e)=>{
+    _ref.current.upload(e)
   }
   /**
    * 获取分类的index
@@ -148,17 +151,8 @@ function PublishProject(props) {
     setClass(myModels[getIndex(myLabel)]);
     // console.log(getIndex(myLabel))
   }, [myLabel])
-
-  // return (
-  //     <div>
-  //       <div id={'model-box'}>这是测试</div>
-  //       <button onClick={downloadModel}>保存</button>
-  //       <Model ref1={_ref} model_path={scene_paths[getSceneIndex(myScene)]} model_name={scene_names[getSceneIndex(myScene)]}/>
-  //     </div>
-  //
-  // )
   return (
-      <Box sx={{flexGrow: 1, display: 'flex', marginTop: 3, marginLeft:25}}>
+      <Box sx={{flexGrow: 1, display: 'flex', marginTop: 3, marginLeft:33}}>
         <Box
             sx={{
               display: 'flex',
@@ -167,7 +161,7 @@ function PublishProject(props) {
                 m: 1,
                 // width:650,
                 // height:650,
-                maxWidth: 900,
+                maxWidth: 1200,
                 maxHeight: 900,
               },
             }}
@@ -197,6 +191,12 @@ function PublishProject(props) {
                   </Select>
                 </FormControl>
                 <Button variant="contained" size="large" sx={{margin: '0 0 10px 10px', display: 'flex'}} onClick={downloadModel}>保存</Button>
+                <Button variant={"outlined"} size={"large"} sx={{margin: '0 0 10px 10px', display: 'flex', color:'#8d6e63', border:'1px solid #8d6e63'}} >
+                  <label htmlFor="glbfileEle">
+                    上传本地模型
+                  </label>
+                </Button>
+                <Input id="glbfileEle" style={{display:"none"}} type="file" onChange={(e)=>{upload(e)}}/>
               </Box>
                   <Model ref1={_ref} model_path={scene_paths[getSceneIndex(myScene)]} model_name={scene_names[getSceneIndex(myScene)]}/>
             </Container>

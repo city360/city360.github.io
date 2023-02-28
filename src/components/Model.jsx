@@ -8,7 +8,18 @@ import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {TransformControls} from "three/examples/jsm/controls/TransformControls";
 import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
 import {exportGLTF, exportToObj} from "../utils";
+import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
 const baseUrl = 'http://rcirkt0a3.hd-bkt.clouddn.com/'
+
+window.URL = window.URL || window.webkitURL || window.mozURL
+const gltfloader = new GLTFLoader()
+
 let container;
 
 let camera, scene, renderer;
@@ -18,6 +29,7 @@ let tran
 const mouse = new THREE.Vector2(), raycaster = new THREE.Raycaster();
 let mouseX = 0, mouseY = 0;
 
+// const [open, setOpen] = React.useState(false)
 let object;
 // let rayCaster = new THREE.Raycaster();
 /**
@@ -43,7 +55,9 @@ container = document.createElement('div');
 async function downloadModel() {
   // exportToObj(scene)
   scene.remove(tran)
+  scene.remove(grid)
   await exportGLTF(scene)
+  scene.add(grid)
   scene.add(tran)
 }
 
@@ -65,10 +79,27 @@ class Model extends React.Component {
       downloadModel:()=>{
         downloadModel()
       },
+      upload:(e)=>{
+          const file = e.target.files[0];
+          let url = URL.createObjectURL(file);
+          console.log(url);
+          gltfloader.load(url,(model)=>{
+            console.log(model);
+            scene.add(model.scene);
+          })
+      },
       scene:this.state.scene
     }
   }
 
+  // handleClose(isDelete){
+  //   if(isDelete){
+  //
+  //   }
+  //   else{
+  //
+  //   }
+  // }
   componentWillUnmount() {
     console.log("调用了这个")
     window.removeEventListener('resize', onWindowResize, true)
@@ -112,7 +143,7 @@ function onProgress(xhr) {
 }
 
 function onError() {
-  downloadModel()
+  // downloadModel()
 }
 
 /**
@@ -162,7 +193,6 @@ function init(model_path, model_name) {
   tran.addEventListener('dragging-changed', function (event) {
     orbit.enabled = !event.value;
   });
-
   addModel(model_path,model_name)
   scene.remove(tran)
   render();
@@ -223,10 +253,22 @@ function onMouseClick(event) {
 
 
 /**
- * 删除模型
+ * 删除模型，但是现在增加了控制旋转功能
  * @param event
  */
 function deleteModel(event) {
+  switch ( event.keyCode ) {
+    case 87: // W
+      tran.setMode( 'translate' );
+      break;
+    case 69: // E
+      tran.setMode( 'rotate' );
+      break;
+    case 82: // R
+      tran.setMode( 'scale' );
+      break;
+    default: break;
+  }
   if (event.keyCode === 46) {
     console.log("点击删除键成功")
     if (currentModel !== "0") {
@@ -235,6 +277,7 @@ function deleteModel(event) {
       scene.getObjectByProperty('uuid', currentModel).removeFromParent()
       console.log(tran)
       currentModel = "0"
+      alert("删除成功！")
     }
   }
 }
@@ -268,6 +311,7 @@ function addModel(model_path, model_name) {
   //   downloadModel()
   //   return;
   // }
+  // model_path =
   loader.setPath(model_path);
   loader.load(model_name + '.mtl', (materials) => {
     materials.preload();

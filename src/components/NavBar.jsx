@@ -25,7 +25,8 @@ const pages = [
   {name: '发布项目', path: '/publish-project'},
   {name: '查看项目', path: '/view-project'},
   {name: '联系我们', path: '/contact-us'},
-  {name: '模型库', path: '/models'}];
+  // {name: '模型库', path: '/models'}
+];
 
 function getIcon(index){
   switch (index) {

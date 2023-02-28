@@ -17,6 +17,7 @@ import {Suspense} from "react";
 import App from "./pages/login";
 import AllProjects from "./pages/project/AllProjects";
 import MyCard from "./pages/home/MyCard";
+import UploadModel from "./pages/upLoad/UploadModel";
 // import Test from "./pages/view/Test";/
 
 const theme = createTheme({
@@ -46,7 +47,7 @@ ReactDOM.render(
                 <Route path="view-project" element={<ViewProject/>}/>
                 <Route path="contact-us" element={<Contact/>}/>
                 <Route path="all-projects" element={<ViewProject/>}/>
-                <Route path="models" element={<Models/>}/>
+                {/*<Route path="models" element={<UploadModel/>}/>*/}
               </Routes>
             </div>
           </Suspense>
